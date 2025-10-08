@@ -4,37 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="javascript" href="app.js">
     <title>GameLog</title>
 </head>
 <body>
     <div id="logo">
         <img src="logo.png" alt="GameLog"> 
     </div>
-    <div class="destaque-container">
+    <div class="carrossel-slide-unico">
+        <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button>
         <h1>Jogos em Destaque</h1>
-        <div class="destaque-carrossel">
-            <div class="card-destaque">
-                <img src="jogo1.jpg" alt="">
-                <h2>Jogo 1</h2>
-                <span>RPG • 2022</span>
-                <span class="card-avaliacao">⭐ 4.9/5</span>
-                <button class="btn-info">More info</button>
-                
+        <div class="slide-container">
+            <div class="slide active">
+                <div class="card-grande">
+                    <img src="jogo1.jpg" alt="Jogo 1">
+                    <div class="card-info">
+                        <h3>Jogo 1</h3>
+                        <p>RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info">More info</button>
+                    </div>
+                </div>
             </div>
-            <div class="jogo">
-                <img src="jogo2.jpg" alt="">
-                <h3>Jogo 2</h3>
-                <span>RPG • 2022</span>
-                <span class="card-avaliacao">⭐ 4.9/5</span>
-                <button class="btn-info">More info</button>
+            <div class="slide">
+                <div class="card-grande">
+                    <img src="jogo2.jpg" alt="Jogo 2">
+                    <div class="card-info">
+                        <h3>Jogo 2</h3>
+                        <p>RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info">More info</button>
+                    </div>
+                </div>
             </div>
-            <div class="jogo">
-                <img src="jogo3.jpg" alt="">
-                <h4>Jogo 3</h4>
-                <span>RPG • 2022</span>
-                <span class="card-avaliacao">⭐ 4.9/5</span>
-                <button class="btn-info">More info</button>
-        </div>
+            <div class="slide">
+                <div class="card-grande">
+                    <img src="jogo3.jpg" alt="Jogo 3">
+                    <div class="card-info">
+                        <h3>Jogo 3</h3>
+                        <p>RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info">More info</button>
+                    </div>
+                </div>
+            </div>
+        <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button>
+    </div>
     </div>
     <div class="categorias-container">
         <h5>Todos os Jogos</h5>
