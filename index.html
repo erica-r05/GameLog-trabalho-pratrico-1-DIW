@@ -11,41 +11,48 @@
     <div id="logo">
         <img src="logo.png" alt="GameLog"> 
     </div>
+    <h1>Jogos em Destaque</h1>
     <div class="carrossel-slide-unico">
-        <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button>
-        <h1>Jogos em Destaque</h1>
+        
         <div class="slide-container">
+            <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button>
             <div class="slide active">
                 <div class="card-grande">
-                    <img src="jogo1.jpg" alt="Jogo 1">
                     <div class="card-info">
+                        <img src="jogo1.jpg" alt="Jogo 1">
                         <h3>Jogo 1</h3>
-                        <p>RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info">More info</button>
+                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info-destaque">More info</button>
                     </div>
                 </div>
             </div>
             <div class="slide">
                 <div class="card-grande">
-                    <img src="jogo2.jpg" alt="Jogo 2">
                     <div class="card-info">
+                        <img src="jogo2.jpg" alt="Jogo 2">
                         <h3>Jogo 2</h3>
-                        <p>RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info">More info</button>
+                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info-destaque">More info</button>
                     </div>
                 </div>
             </div>
             <div class="slide">
                 <div class="card-grande">
-                    <img src="jogo3.jpg" alt="Jogo 3">
                     <div class="card-info">
+                        <img src="jogo3.jpg" alt="Jogo 3">
                         <h3>Jogo 3</h3>
-                        <p>RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info">More info</button>
+                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
+                        <button class="btn-info-destaque">More info</button>
                     </div>
                 </div>
             </div>
-        <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button>
+            <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button>
+            <div class="slide-indicators">
+                <span class="dot active" onclick="irParaSlide(0)"></span>
+                <span class="dot" onclick="irParaSlide(1)"></span>
+                <span class="dot" onclick="irParaSlide(2)"></span>
+            </div>
+        </div>
     </div>
     </div>
     <div class="categorias-container">
@@ -170,13 +177,14 @@
 <footer>
     <h6>Informações do aluno</h6>
     <div class="aluno-info">
-        <h7>Autoria</h7>
-        <p><strong>Nome:</strong> Erica Regina da Silva</p>
-        <p><strong>Curso:</strong> Engenharia de Software</p>
-        <p><strong>Turma:</strong> Manhã</p>
-        <h8>Redes sociais</h8>
-        <p><strong>GitHub:</strong><a href="https://github.com/erica-r05" target="https://github.com/erica-r05"> github.com/erica-r05</a></p>
-        </div>
+        <h7><strong>Autoria</strong></h7>
+        <p>Nome: Erica Regina da Silva</p>
+        <p>Curso: Engenharia de Software</p>
+        <p>Turma: Manhã</p>
+        <h8><strong>Redes sociais</strong></h8>
+        <p><strong>GitHub:</strong> erica-r05</p>
+    </div>
 </footer>
+<script src="app.js"></script>
 </body>
 </html>
