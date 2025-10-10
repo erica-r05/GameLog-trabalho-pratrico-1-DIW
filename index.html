@@ -1,190 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="javascript" href="app.js">
+    
     <title>GameLog</title>
 </head>
+
 <body>
     <div id="logo">
-        <img src="logo.png" alt="GameLog"> 
+        <img src="img/logo.png" alt="GameLog">
     </div>
     <h1>Jogos em Destaque</h1>
-    <div class="carrossel-slide-unico">
+    <div class="carrossel-container">
+    <div class="carrossel" id="carrossel">
+        <div class="slide active">
+            <img src="img/minecraft.jpg" alt="Game 1" class="slide-img">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="game-title">Cyberpunk 2077</h2>
+                <div class="game-info">
+                    <span class="rating">▲ 4.9/5</span>
+                    <span>•</span>
+                    <span>2022</span>
+                    <span>•</span>
+                    <span>RPG</span>
+                </div>
+                <p class="game-description">Um RPG de ação e aventura em mundo aberto que se passa em Night City, uma megalópole obcecada por poder, glamour e modificações corporais.</p>
+                <button class="btn-info">ⓘ Mais Informações</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="img/residentevil4.png" alt="Game 2" class="slide-img">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="game-title">The Witcher 3</h2>
+                <div class="game-info">
+                    <span class="rating">▲ 4.8/5</span>
+                    <span>•</span>
+                    <span>2015</span>
+                    <span>•</span>
+                    <span>RPG</span>
+                </div>
+                <p class="game-description">Um RPG de mundo aberto que segue a história de Geralt de Rívia, um bruxo caçador de monstros em busca de sua filha adotiva.</p>
+                <button class="btn-info">ⓘ Mais Informações</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="img/tlou.jpg" alt="Game 2" class="slide-img">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="game-title">The Witcher 3</h2>
+                <div class="game-info">
+                    <span class="rating">▲ 4.8/5</span>
+                    <span>•</span>
+                    <span>2015</span>
+                    <span>•</span>
+                    <span>RPG</span>
+                </div>
+                <p class="game-description">Um RPG de mundo aberto que segue a história de Geralt de Rívia, um bruxo caçador de monstros em busca de sua filha adotiva.</p>
+                <button class="btn-info">ⓘ Mais Informações</button>
+            </div>
+        </div>
+    </div>
+        <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button> <!--botoes de passar o slide-->
+        <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button> <!--botoes de passar o slide-->
+    </div>
+    <div class="slide-indicators">
+        <span class="dot active" onclick="irParaSlide(1)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
+        <span class="dot" onclick="irParaSlide(2)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
+        <span class="dot" onclick="irParaSlide(3)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
+    </div>
+    <h5>Todos os Jogos</h5>
+    <div class="categoria-grid">
+        <div class="card-content">
+            <img src="imgs/cards/Fornite logo 2024.jpg" alt="">
+            <p>Fortnite</p>
+            <span>Battle Royale • 2017</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/Grand Theft Auto V – Wikipedia.jpg" alt="">
+            <p>Grand Theft Auto V (GTA V)</p>
+            <span>Ação-Aventura • 2013</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/HLDS Counter Strike 1_6 Server.jpg" alt="">
+            <p>Counter-Strike 2</p>
+            <span>Tiro • 2023</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/League of Legends.jpg" alt="">
+            <p> LOL</p>
+            <span>Batalha • 2009</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/Roblox.jpg" alt="">
+            <p>Roblox</p>
+            <span>Metaverso • 2006</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+           <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/dota2.jpg" alt="">
+            <p>Dota 2</p>
+            <span>Batalha• 2013</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/pubg.jpg" alt="">
+            <p>PUBG: Battlegrounds </p>
+            <span>Battle Royale • 2017</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/apexleg.jpg" alt="">
+            <p>Apex Legends</p>
+            <span>Battle Royale • 2019</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
         
-        <div class="slide-container">
-            <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button>
-            <div class="slide active">
-                <div class="card-grande">
-                    <div class="card-info">
-                        <img src="jogo1.jpg" alt="Jogo 1">
-                        <h3>Jogo 1</h3>
-                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info-destaque">More info</button>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="card-grande">
-                    <div class="card-info">
-                        <img src="jogo2.jpg" alt="Jogo 2">
-                        <h3>Jogo 2</h3>
-                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info-destaque">More info</button>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="card-grande">
-                    <div class="card-info">
-                        <img src="jogo3.jpg" alt="Jogo 3">
-                        <h3>Jogo 3</h3>
-                        <p class="info-jogo">RPG - 2022 ▲ 4.9/5</p>
-                        <button class="btn-info-destaque">More info</button>
-                    </div>
-                </div>
-            </div>
-            <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button>
-            <div class="slide-indicators">
-                <span class="dot active" onclick="irParaSlide(0)"></span>
-                <span class="dot" onclick="irParaSlide(1)"></span>
-                <span class="dot" onclick="irParaSlide(2)"></span>
-            </div>
+        <div class="card-content">
+            <img src="imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg" alt="">
+            <p>Genshin Impact</p>
+            <span>RPG • 2020</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <button class="btn-info"><strong>More info</strong></button>
+        </div>
+        <div class="card-content">
+            <img src="imgs/cards/ff.jpg" alt="">
+            <p>Garena Free Fire</p>
+            <span>Battle Royale • 2017</span>
+            <span class="card-avaliacao">⭐ 4.9/5</span>
+           <button class="btn-info"><strong>More info</strong></button>
         </div>
     </div>
     </div>
-    <div class="categorias-container">
-        <h5>Todos os Jogos</h5>
-        <div class="categoria-grid">
-            <div class="categoria-card">
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 1</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 2</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 3</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 4</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 5</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 6</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 7</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 8</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                 <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 5</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 6</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 7</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 8</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                 <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 5</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 6</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 7</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-                <div class="card-content">
-                    <img src="categoria1.jpg" alt="">
-                    <p>Jogo 8</p>
-                    <span>RPG • 2022</span>
-                    <span class="card-avaliacao">⭐ 4.9/5</span>
-                    <button class="btn-info">More info</button>
-                </div>
-            </div>
+    <footer>
+        <h6>Informações do aluno</h6>
+        <div class="aluno-info">
+            <h7><strong>Autoria</strong></h7>
+            <p>Nome: Erica Regina da Silva</p>
+            <p>Curso: Engenharia de Software</p>
+            <p>Turma: Manhã</p>
+            <h8><strong>Redes sociais</strong></h8>
+            <p><strong>GitHub:</strong> erica-r05</p>
         </div>
-    </div>
-<footer>
-    <h6>Informações do aluno</h6>
-    <div class="aluno-info">
-        <h7><strong>Autoria</strong></h7>
-        <p>Nome: Erica Regina da Silva</p>
-        <p>Curso: Engenharia de Software</p>
-        <p>Turma: Manhã</p>
-        <h8><strong>Redes sociais</strong></h8>
-        <p><strong>GitHub:</strong> erica-r05</p>
-    </div>
-</footer>
-<script src="app.js"></script>
+    </footer>
+    <script src="app.js" defer></script>
 </body>
+
 </html>
