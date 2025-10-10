@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>GameLog</title>
 </head>
 
@@ -14,64 +15,52 @@
         <img src="img/logo.png" alt="GameLog">
     </div>
     <h1>Jogos em Destaque</h1>
-    <div class="carrossel-container">
-    <div class="carrossel" id="carrossel">
-        <div class="slide active">
-            <img src="img/minecraft.jpg" alt="Game 1" class="slide-img">
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fixed-height" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
             <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="game-title">Cyberpunk 2077</h2>
-                <div class="game-info">
-                    <span class="rating">▲ 4.9/5</span>
-                    <span>•</span>
-                    <span>2022</span>
-                    <span>•</span>
-                    <span>RPG</span>
+            <div class="carousel-item active">
+                <img src="img/minecraft.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                    <button class="btn btn-primary" onclick="irParaDetalhe(0)"><strong>More info</strong></button>
                 </div>
-                <p class="game-description">Um RPG de ação e aventura em mundo aberto que se passa em Night City, uma megalópole obcecada por poder, glamour e modificações corporais.</p>
-                <button class="btn-info">ⓘ Mais Informações</button>
+            </div>
+            <div class="carousel-item">
+                <img src="img/residentevil4.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p>
+                    <button class="btn btn-primary" onclick="irParaDetalhe(1)"><strong>More info</strong></button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/tlou.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Some representative placeholder content for the third slide.</p>
+                    <button class="btn btn-primary" onclick="irParaDetalhe(2)"><strong>More info</strong></button>
+                </div>
             </div>
         </div>
-        <div class="slide">
-            <img src="img/residentevil4.png" alt="Game 2" class="slide-img">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="game-title">The Witcher 3</h2>
-                <div class="game-info">
-                    <span class="rating">▲ 4.8/5</span>
-                    <span>•</span>
-                    <span>2015</span>
-                    <span>•</span>
-                    <span>RPG</span>
-                </div>
-                <p class="game-description">Um RPG de mundo aberto que segue a história de Geralt de Rívia, um bruxo caçador de monstros em busca de sua filha adotiva.</p>
-                <button class="btn-info">ⓘ Mais Informações</button>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="img/tlou.jpg" alt="Game 2" class="slide-img">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="game-title">The Witcher 3</h2>
-                <div class="game-info">
-                    <span class="rating">▲ 4.8/5</span>
-                    <span>•</span>
-                    <span>2015</span>
-                    <span>•</span>
-                    <span>RPG</span>
-                </div>
-                <p class="game-description">Um RPG de mundo aberto que segue a história de Geralt de Rívia, um bruxo caçador de monstros em busca de sua filha adotiva.</p>
-                <button class="btn-info">ⓘ Mais Informações</button>
-            </div>
-        </div>
-    </div>
-        <button class="nav-btn prev-btn" onclick="mudarSlide(-1)">‹</button> <!--botoes de passar o slide-->
-        <button class="nav-btn next-btn" onclick="mudarSlide(1)">›</button> <!--botoes de passar o slide-->
-    </div>
-    <div class="slide-indicators">
-        <span class="dot active" onclick="irParaSlide(1)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
-        <span class="dot" onclick="irParaSlide(2)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
-        <span class="dot" onclick="irParaSlide(3)"></span> <!--dá a funcionalidade dos botões, ligado ao js-->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <h5>Todos os Jogos</h5>
     <div class="categoria-grid">
@@ -80,71 +69,71 @@
             <p>Fortnite</p>
             <span>Battle Royale • 2017</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(3)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/Grand Theft Auto V – Wikipedia.jpg" alt="">
             <p>Grand Theft Auto V (GTA V)</p>
             <span>Ação-Aventura • 2013</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+           <button class="btn-info" onclick="irParaDetalhe(4)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/HLDS Counter Strike 1_6 Server.jpg" alt="">
             <p>Counter-Strike 2</p>
             <span>Tiro • 2023</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(5)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/League of Legends.jpg" alt="">
             <p> LOL</p>
             <span>Batalha • 2009</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info"  onclick="irParaDetalhe(6)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/Roblox.jpg" alt="">
             <p>Roblox</p>
             <span>Metaverso • 2006</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-           <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info"  onclick="irParaDetalhe(7)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/dota2.jpg" alt="">
             <p>Dota 2</p>
             <span>Batalha• 2013</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(8)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/pubg.jpg" alt="">
             <p>PUBG: Battlegrounds </p>
             <span>Battle Royale • 2017</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(9)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/apexleg.jpg" alt="">
             <p>Apex Legends</p>
             <span>Battle Royale • 2019</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info"  onclick="irParaDetalhe(10)"><strong>More info</strong></button>
         </div>
-        
         <div class="card-content">
-            <img src="imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg" alt="">
+            <img src="imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg"
+                alt="">
             <p>Genshin Impact</p>
             <span>RPG • 2020</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(11)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
             <img src="imgs/cards/ff.jpg" alt="">
             <p>Garena Free Fire</p>
             <span>Battle Royale • 2017</span>
             <span class="card-avaliacao">⭐ 4.9/5</span>
-           <button class="btn-info"><strong>More info</strong></button>
+            <button class="btn-info" onclick="irParaDetalhe(12)"><strong>More info</strong></button>
         </div>
     </div>
     </div>
@@ -159,7 +148,11 @@
             <p><strong>GitHub:</strong> erica-r05</p>
         </div>
     </footer>
-    <script src="app.js" defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+        <script src="app.js" defer></script>
 </body>
 
 </html>
