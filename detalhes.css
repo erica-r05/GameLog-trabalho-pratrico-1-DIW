@@ -1,0 +1,141 @@
+/* Estilos básicos para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color:#15042e; /* Cor de fundo da tela */
+    margin: 0;
+    padding: 0;
+}
+header{
+    background-color: #281255;
+    color: rgb(132, 78, 194);
+    padding: 10px 0;
+    text-align: center;
+}
+
+#logo img{
+    height: 150px;
+    vertical-align: middle;
+    
+}
+
+/* Container que simula a "janela" do wireframe */
+.container-detalhes {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #53268d;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: center;
+}
+
+/* Estilo do título principal */
+.header h1 {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0b3ff;
+}
+.informacoes_gerais h2{
+    text-align: center;
+    padding-bottom: 20px;
+    color: #e0b3ff;
+    font-size: 40px;
+}
+
+/* Estilos de separação para as seções */
+section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0b3ff;
+}
+
+.conteudo_principal {
+    display: flex;
+    gap: 30px; /* Espaço entre a imagem e o texto */
+    align-items: flex-start; /* Alinha tudo ao topo */
+    max-width: 1200px; /* Limita a largura total no monitor */
+    margin: 20px auto; /* Centraliza o bloco na página */
+}
+
+.imagem_representativa {
+    flex: 1; 
+    max-width: 450px;
+    min-height: 350px; /* Simula a área da imagem */
+    display: flex; /* Para centralizar o placeholder */
+    justify-content: center;
+    align-items: center;
+    background-color: #53268d;
+    flex-basis: 350px; /* Garante que ocupe o espaço reservado e a imagem interna se ajuste */
+    flex-shrink: 0; 
+}
+#imagem-principal{
+    width: 100%;
+    height: auto;
+}
+
+
+.detalhes_texto {
+    flex: 1; /* Ocupa 2/3 do espaço */
+    padding: 10px;
+    flex-grow: 1;
+    background-color:#53268d;
+
+}
+
+.detalhes_texto ul {
+    list-style: none;
+    padding-left: 0;
+    color: #e0b3ff;
+}
+
+.detalhes-texto li {
+    margin-bottom: 8px;
+}
+
+.detalhes_texto .label {
+    font-weight: bold;
+}
+
+/* GALERIA DE FOTOS (THUMBNAILS) */
+.galeria-fotos {
+    display: flex;
+    overflow-x: auto; /* Permite a rolagem horizontal, como sugerido pelo wireframe */
+    gap: 10px;
+    padding-bottom: 10px;
+    /* Para esconder a barra de rolagem: */
+    /* scrollbar-width: none; Para Firefox */
+}
+
+/* Para navegadores baseados em WebKit (Chrome, Safari) */
+.galeria-fotos::-webkit-scrollbar {
+    display: none;
+}
+
+.thumbnail {
+    flex-shrink: 0; /* Impede que os thumbnails diminuam */
+    width: 80px;
+    height: 80px;
+    background-color: #e0e0e0;
+    border: 1px solid #e0b3ff;
+    cursor: pointer;
+    /* Estilos para o placeholder cinza com o ícone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o thumbnail sem distorcer */
+}
+
+.indicador-proximo {
+    /* Representa o '>' no wireframe */
+    align-self: center; /* Alinha verticalmente ao centro */
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 10px;
+    color:#e0b3ff;
+    cursor: pointer;
+}
