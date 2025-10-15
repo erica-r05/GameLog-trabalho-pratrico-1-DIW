@@ -2,8 +2,8 @@ function irParaDetalhe(itemId) {
     window.location.href = "detalhes.html?id=" + itemId;
 }
 const DadosdoItem = {
-    DetalhesGame: [
-        0, {
+
+        0: {
             id: 0,
             nome: "Minecraft",
             imagem_principal: "img/minecraft.jpg",
@@ -18,7 +18,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        1, {
+        1: {
             id: 1,
             nome: "Resident Evil 4",
             imagem_principal: "img/residentevil4.png",
@@ -33,7 +33,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        2, {
+        2: {
             id: 2,
             nome: "The last of us",
             imagem_principal: "img/tlou.jpg",
@@ -48,7 +48,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        3, {
+        3: {
             id: 3,
             nome: "Fortnite",
             imagem_principal: "imgs/cards/Fornite logo 2024.jpg",
@@ -63,7 +63,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        4, {
+        4: {
             id: 4,
             nome: "Grand Theft Auto V (GTA V)",
             imagem_principal: "imgs/cards/Grand Theft Auto V – Wikipedia.jpg",
@@ -78,7 +78,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        5, {
+        5: {
             id: 5,
             nome: "Counter-Strike 2",
             imagem_principal: "imgs/cards/HLDS Counter Strike 1_6 Server.jpg",
@@ -93,7 +93,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        6, {
+        6: {
             id: 6,
             nome: "League of Legends (LoL)",
             imagem_principal: "imgs/cards/League of Legends.jpg",
@@ -108,7 +108,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        7, {
+        7: {
             id: 7,
             nome: "Roblox",
             imagem_principal: "imgs/cards/Roblox.jpg",
@@ -123,7 +123,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        8, {
+        8: {
             id: 8,
             nome: "Dota 2",
             imagem_principal: "imgs/cards/dota2.jpg",
@@ -138,7 +138,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        9, {
+        9: {
             id: 9,
             nome: "PUBG: Battlegrounds",
             imagem_principal: "imgs/cards/pubg.jpg",
@@ -153,7 +153,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        10, {
+        10: {
             id: 10,
             nome: "Apex Legends",
             imagem_principal: "imgs/cards/apexleg.jpg",
@@ -168,7 +168,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        11, {
+        11: {
             id: 11,
             nome: "Genshin Impact",
             imagem_principal: "imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg",
@@ -183,7 +183,7 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         },
-        12, {
+        12: {
             id: 12,
             nome: "Garena Free Fire ",
             imagem_principal: "imgs/cards/ff.jpg",
@@ -198,45 +198,39 @@ const DadosdoItem = {
                 "link/foto3.jpg"
             ]
         }
-
-    ],
-
 };
 
 function carregarDetalhes() {
     // 1. Obter o ID da URL
     const urlParams = new URLSearchParams(window.location.search);
     const itemId = urlParams.get('id');
-
-    // 2. Verificar se o ID existe na URL
+    // 2. Verifica se o ID foi fornecido
     if (!itemId) {
-        document.getElementById('container-principal').innerHTML = '<p>Item não encontrado (ID não fornecido na URL).</p>';
+        document.getElementById('nome-do-jogo').textContent = 'Erro: ID do item não fornecido.';
         return;
     }
-
-    // 3. Buscar o item nos dados (Assumindo que DadosdoItem está definido)
-    // CORREÇÃO: Você usou "itemId" duas vezes no seu if/else. Corrigimos a segunda checagem.
+    // 3. Busca o item nos dados
     const item = DadosdoItem[itemId];
-    if (!item) { // Se o item NÃO for encontrado
-        document.getElementById('container-principal').innerHTML = '<p>Item não encontrado (ID inválido).</p>';
+    if (!item) { 
+        document.getElementById('nome-do-jogo').textContent = `Erro: Item com ID ${itemId} não encontrado.`;
         return;
     }
-
-    // A. INJETAR INFORMAÇÕES GERAIS E DETALHES
-
-    // CORREÇÃO: Você precisa de um container principal com o ID onde o conteúdo será injetado.
-    // Assumimos que existe um <div id="container-principal"> na sua página.
-    document.getElementById('container-principal').innerHTML = `
+    const informacoesGeraisContainer = document.getElementById('informacoes_gerais');
+    if (!informacoesGeraisContainer) {
+        console.error("Elemento com ID 'informacoes_gerais' não encontrado.");
+        return;
+    }
+    informacoesGeraisContainer.innerHTML = `
         <section class="informacoes_gerais">
             <h2>${item.nome}</h2>
             <div class="conteudo_principal">
                 <div class="imagem_representativa">
-                    <img id="imagem-principal" src="${item.imagem}" alt="${item.nome}">
+                    <img id="imagem-principal" src="${item.imagem_principal}" alt="${item.nome}">
                 </div>
                 <div class="detalhes_texto">
                     <ul>
                         <li><span class="label">Nome do jogo:</span> ${item.nome}</li>
-                        <li><span class="label">Data de Lançamento:</span> ${item.data_lancamento}</li>
+                        <li><span class="label">Data de Lançamento:</span> ${item.dataLancamento}</li>
                         <li><span class="label">Categoria:</span> ${item.categoria}</li>
                         <li><span class="label">Descrição:</span> ${item.descricao}</li>
                         <li><span class="label">Curiosidade:</span> ${item.curiosidade}</li>
@@ -251,23 +245,22 @@ function carregarDetalhes() {
                 </div>
         </section>
     `;
-
-    // B. CARREGAR A GALERIA DE FOTOS (CHAMA A FUNÇÃO AUXILIAR)
-    carregarGaleria(item.fotos_associadas);
+    const imgPrincipalElement = document.getElementById('imagem-principal');
+    
+    carregarGaleria(item.fotos, imgPrincipalElement);
 }
 
-// Função auxiliar para injetar as miniaturas e dar a funcionalidade de clique
-function carregarGaleria(fotos) {
+function carregarGaleria(fotos, imagemPrincipal) {
     const containerGaleria = document.getElementById('galeria-thumbnails-container');
-    const imagemPrincipal = document.getElementById('imagem-principal');
-
-    // Se a lista de fotos for vazia, adicionamos um placeholder ou nada
+    
+    if (!containerGaleria || !imagemPrincipal) {
+        return;
+    }
+    containerGaleria.innerHTML = ''; 
     if (!fotos || fotos.length === 0) {
         containerGaleria.innerHTML = '<p>Não há fotos associadas.</p>';
         return;
     }
-
-    // Criamos o HTML das miniaturas
     let thumbnailsHTML = fotos.map(urlFoto => {
         return `
             <div class="thumbnail" data-url="${urlFoto}">
@@ -275,21 +268,14 @@ function carregarGaleria(fotos) {
             </div>
         `;
     }).join('');
-
-    // Adicionamos o indicador de próximo (se o layout CSS for de rolagem)
     thumbnailsHTML += '<span class="indicador-proximo"> &gt; </span>';
-
-    // Injetamos o HTML das miniaturas
     containerGaleria.innerHTML = thumbnailsHTML;
-
-    // Adicionamos a lógica de clique para trocar a imagem principal
     document.querySelectorAll('.thumbnail').forEach(thumbnail => {
         thumbnail.addEventListener('click', (evento) => {
             const novaURL = evento.currentTarget.getAttribute('data-url');
-            imagemPrincipal.src = novaURL;
+            imagemPrincipal.src = novaURL; // Usando o elemento passado como parâmetro
         });
     });
 }
-
 // Inicia o carregamento quando a página estiver totalmente carregada
 document.addEventListener('DOMContentLoaded', carregarDetalhes);
