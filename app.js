@@ -1,8 +1,8 @@
 function irParaDetalhe(itemId) {
     window.location.href = "detalhes.html?id=" + itemId;
 }
+/*arquiso json dos detalhes*/ 
 const DadosdoItem = {
-
         0: {
             id: 0,
             nome: "Minecraft",
@@ -201,15 +201,14 @@ const DadosdoItem = {
 };
 
 function carregarDetalhes() {
-    // 1. Obter o ID da URL
     const urlParams = new URLSearchParams(window.location.search);
     const itemId = urlParams.get('id');
-    // 2. Verifica se o ID foi fornecido
+    /*verifica o ID*/
     if (!itemId) {
         document.getElementById('nome-do-jogo').textContent = 'Erro: ID do item não fornecido.';
         return;
     }
-    // 3. Busca o item nos dados
+    /*busca o item nos dados*/
     const item = DadosdoItem[itemId];
     if (!item) { 
         document.getElementById('nome-do-jogo').textContent = `Erro: Item com ID ${itemId} não encontrado.`;
@@ -220,6 +219,7 @@ function carregarDetalhes() {
         console.error("Elemento com ID 'informacoes_gerais' não encontrado.");
         return;
     }
+    /*busca a descrição etc*/
     informacoesGeraisContainer.innerHTML = `
         <section class="informacoes_gerais">
             <h2>${item.nome}</h2>
@@ -239,16 +239,15 @@ function carregarDetalhes() {
             </div>
         </section>
         <section class="fotos_associadas">
-            <h3>Mais fotos (Galeria de Thumbnails)</h3>
+            <h3>Mais fotos</h3>
             <div class="galeria-thumbnails" id="galeria-thumbnails-container">
                 </div>
         </section>
     `;
     const imgPrincipalElement = document.getElementById('imagem-principal');
-    
     carregarGaleria(item.fotos, imgPrincipalElement);
 }
-
+/*busca as outras fotos*/
 function carregarGaleria(fotos, imagemPrincipal) {
     const containerGaleria = document.getElementById('galeria-thumbnails-container');
     
@@ -267,14 +266,13 @@ function carregarGaleria(fotos, imagemPrincipal) {
             </div>
         `;
     }).join('');
-    thumbnailsHTML += '<span class="indicador-proximo"> &gt; </span>';
     containerGaleria.innerHTML = thumbnailsHTML;
     document.querySelectorAll('.thumbnail').forEach(thumbnail => {
         thumbnail.addEventListener('click', (evento) => {
             const novaURL = evento.currentTarget.getAttribute('data-url');
-            imagemPrincipal.src = novaURL; // Usando o elemento passado como parâmetro
+            imagemPrincipal.src = novaURL; 
+            
         });
     });
 }
-// Inicia o carregamento quando a página estiver totalmente carregada
 document.addEventListener('DOMContentLoaded', carregarDetalhes);
