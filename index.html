@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="codigo/assets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>GameLog</title>
@@ -12,7 +12,7 @@
 
 <body>
     <div id="logo">
-        <img src="img/logo.png" alt="GameLog">
+        <img src="codigo/img/logo.png" alt="GameLog">
     </div>
     <h1>Jogos em Destaque</h1>
     <div id="carouselExampleCaptions" class="carousel slide carousel-fixed-height" data-bs-ride="carousel">
@@ -27,26 +27,26 @@
         <div class="carousel-inner">
             <div class="slide-overlay"></div>
             <div class="carousel-item active">
-                <img src="img/minecraft.jpg" class="d-block w-100" alt="...">
+                <img src="codigo/img/minecraft.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Minecraft</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                    <p>Sua Imaginação é o Limite. Construa mundos, destrua blocos e crie sua própria aventura...</p>
                     <button class="btn btn-primary" onclick="irParaDetalhe(0)"><strong>More info</strong></button>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/residentevil4.png" class="d-block w-100" alt="...">
+                <img src="codigo/img/residentevil4.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Resident Evil 4</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
+                    <p>Você Consegue Sobreviver? Encare o horror e a ação que redefiniram o survival-horror...</p>
                     <button class="btn btn-primary" onclick="irParaDetalhe(1)"><strong>More info</strong></button>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/tlou.jpg" class="d-block w-100" alt="...">
+                <img src="codigo/img/tlou.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>The last of us</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                    <p>O Mundo Acabou. Sua História Não. Lute contra infectados e humanos neste drama pós-apocalíptico...</p>
                     <button class="btn btn-primary" onclick="irParaDetalhe(2)"><strong>More info</strong></button>
                 </div>
             </div>
@@ -65,74 +65,114 @@
     <h5>Todos os Jogos</h5>
     <div class="categoria-grid">
         <div class="card-content">
-            <img src="imgs/cards/Fornite logo 2024.jpg" alt="">
-            <p>Fortnite</p>
-            <span>Battle Royale • 2017</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/Fornite logo 2024.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Fortnite</p>
+                <span>Battle Royale • 2017</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(3)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/Grand Theft Auto V – Wikipedia.jpg" alt="">
-            <p>Grand Theft Auto V (GTA V)</p>
-            <span>Ação-Aventura • 2013</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
-           <button class="btn-info" onclick="irParaDetalhe(4)"><strong>More info</strong></button>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/Grand Theft Auto V – Wikipedia.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Grand Theft Auto V (GTA V)</p>
+                <span>Ação-Aventura • 2013</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
+            <button class="btn-info" onclick="irParaDetalhe(4)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/HLDS Counter Strike 1_6 Server.jpg" alt="">
-            <p>Counter-Strike 2</p>
-            <span>Tiro • 2023</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/HLDS Counter Strike 1_6 Server.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Counter-Strike 2</p>
+                <span>Tiro • 2023</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(5)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/League of Legends.jpg" alt="">
-            <p> LOL</p>
-            <span>Batalha • 2009</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"  onclick="irParaDetalhe(6)"><strong>More info</strong></button>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/League of Legends.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p> LOL</p>
+                <span>Batalha • 2009</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
+            <button class="btn-info" onclick="irParaDetalhe(6)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/Roblox.jpg" alt="">
-            <p>Roblox</p>
-            <span>Metaverso • 2006</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"  onclick="irParaDetalhe(7)"><strong>More info</strong></button>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/Roblox.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Roblox</p>
+                <span>Metaverso • 2006</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
+            <button class="btn-info" onclick="irParaDetalhe(7)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/dota2.jpg" alt="">
-            <p>Dota 2</p>
-            <span>Batalha• 2013</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/dota2.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Dota 2</p>
+                <span>Batalha• 2013</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(8)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/pubg.jpg" alt="">
-            <p>PUBG: Battlegrounds </p>
-            <span>Battle Royale • 2017</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/pubg.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>PUBG: Battlegrounds </p>
+                <span>Battle Royale • 2017</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(9)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/apexleg.jpg" alt="">
-            <p>Apex Legends</p>
-            <span>Battle Royale • 2019</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
-            <button class="btn-info"  onclick="irParaDetalhe(10)"><strong>More info</strong></button>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/apexleg.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Apex Legends</p>
+                <span>Battle Royale • 2019</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
+            <button class="btn-info" onclick="irParaDetalhe(10)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg"
-                alt="">
-            <p>Genshin Impact</p>
-            <span>RPG • 2020</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/Genshin Impact Circle App PNG Transparent With Clear Background ID 472716 _ TopPNG.jpg"
+                    alt="">
+            </div>
+            <div class="card_infos">
+                <p>Genshin Impact</p>
+                <span>RPG • 2020</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(11)"><strong>More info</strong></button>
         </div>
         <div class="card-content">
-            <img src="imgs/cards/ff.jpg" alt="">
-            <p>Garena Free Fire</p>
-            <span>Battle Royale • 2017</span>
-            <span class="card-avaliacao">⭐ 4.9/5</span>
+            <div class="image_content">
+                <img src="codigo/img/imgs/cards/ff.jpg" alt="">
+            </div>
+            <div class="card_infos">
+                <p>Garena Free Fire</p>
+                <span>Battle Royale • 2017</span>
+                <span class="card-avaliacao">⭐ 4.9/5</span>
+            </div>
             <button class="btn-info" onclick="irParaDetalhe(12)"><strong>More info</strong></button>
         </div>
     </div>
@@ -148,11 +188,9 @@
             <p><strong>GitHub:</strong> erica-r05</p>
         </div>
     </footer>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-        <script src="app.js" defer></script>
+    <script src="codigo/assets/app.js" defer></script>
 </body>
-
 </html>
