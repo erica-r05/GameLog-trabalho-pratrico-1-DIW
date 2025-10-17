@@ -1,22 +1,52 @@
-
 body {
     font-family: Arial, sans-serif;
-    background-color:#15042e; /* Cor de fundo da tela */
+    background-color: #15042e;
+    /* Cor de fundo da tela */
     margin: 0;
     padding: 0;
 }
-header{
+
+header {
     background-color: #281255;
     color: rgb(132, 78, 194);
     padding: 10px 0;
     text-align: center;
 }
 
-#logo img{
-    height: 150px;
-    vertical-align: middle;
-    
+#logo {
+    background-color: aqua;
+    height: 90px;
+    margin-bottom: 20%;
+    margin-left: 1%;
+    margin-right: 20%;
 }
+
+.logo-voltar img {
+    height: 120px;
+    margin-right: 100%;
+}
+
+.logo-voltar {
+    width: 20%;
+    height: auto;
+
+}
+
+.btn-primary {
+    background: rgba(186, 118, 226, 0.7);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    margin-bottom: 20%;
+    margin-left: 20%;
+}
+
+.btn-primary:hover {
+    background: rgba(87, 38, 128, 0.9) !important;
+}
+
 .container-detalhes {
     max-width: 1000px;
     margin: 40px auto;
@@ -26,17 +56,20 @@ header{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: center;
 }
+
 .header h1 {
     text-align: center;
     padding-bottom: 20px;
     border-bottom: 2px solid #e0b3ff;
 }
-.informacoes_gerais h2{
+
+.informacoes_gerais h2 {
     text-align: center;
     padding-bottom: 20px;
     color: #e0b3ff;
     font-size: 30px;
 }
+
 section {
     margin-top: 30px;
     padding-top: 20px;
@@ -45,36 +78,44 @@ section {
 
 .conteudo_principal {
     display: flex;
-    gap: 30px; /* Espaço entre a imagem e o texto */
-    align-items: flex-start; /* Alinha tudo ao topo */
-    max-width: 1200px; 
-    margin: 20px auto; 
+    gap: 30px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 20px auto;
+    flex-direction: column;
+    align-items: center;
 }
 
 .imagem_representativa {
-    flex: 1; 
+    /*pra mobileeee*/
+    flex: 1;
     max-width: 350px;
-    min-height: 350px; 
-    display: flex; 
+    min-height: 350px;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: #53268d;
-    flex-basis: 350px; 
-    flex-shrink: 0; 
-    margin-top: 40px;
     margin-left: 35px;
+    width: 100%;
+    text-align: center;
+
 }
-#imagem-principal{
+
+#imagem-principal {
     width: 100%;
     height: auto;
+    margin-top: 40px;
 }
 
 
 .detalhes_texto {
-    flex: 1; 
+    flex: 1;
     padding: 10px;
     flex-grow: 1;
-    background-color:#53268d;
+    background-color: #53268d;
+    width: 100%;
+    word-wrap: break-word;
+    font-family: Arial, Helvetica, sans-serif;
 
 }
 
@@ -84,21 +125,19 @@ section {
     color: #e0b3ff;
 }
 
-.detalhes-texto li {
-    margin-bottom: 8px;
-}
-
 .detalhes_texto .label {
     font-weight: bold;
+    font-size: larger;
 }
+
 .galeria-fotos {
     display: flex;
-    overflow-x: auto; /* Permite a rolagem horizontal */
+    overflow-x: auto;
     gap: 10px;
     padding-bottom: 10px;
 }
 
-.fotos_associadas h3{
+.fotos_associadas h3 {
     text-align: center;
     padding-bottom: 20px;
     border-bottom: 2px solid #e0b3ff;
@@ -106,33 +145,48 @@ section {
     font-size: 30px;
     margin-bottom: 50px;
 }
+
 #galeria-thumbnails-container {
-    display: flex; 
-    gap: 10px; 
-    padding: 10px 0; 
-    overflow-x: auto; 
-    overflow-y: hidden; 
-    white-space: nowrap; 
-    
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
 }
+
 .thumbnail {
-    width: 250px; 
+    width: 250px;
     height: 200px;
-    flex-shrink: 0; 
+    flex-shrink: 0;
     cursor: pointer;
-    border: 2px solid transparent; 
+    border: 2px solid transparent;
     border-radius: 4px;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 
-footer{
+footer {
     text-align: center;
     color: #e0b3ff;
+}
+
+@media (min-width: 768px) {
+
+    /*pra desktop*/
+    .conteudo_principal {
+        flex-direction: row;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 40px auto;
+        align-items: flex-start;
+        padding: 0;
+    }
 }

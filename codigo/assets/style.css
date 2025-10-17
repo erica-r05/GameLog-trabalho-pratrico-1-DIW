@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #15042e !important;
     color: white !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
 }
 
 header {
@@ -11,9 +15,14 @@ header {
     text-align: center;
 }
 
+#logo {
+    width: 200px;
+    height: 100px;
+}
+
 #logo img {
-    height: 150px;
-    vertical-align: middle;
+    height: 100px;
+    margin-bottom: 100px;
 
 
 }
@@ -21,12 +30,13 @@ header {
 .categoria-grid {
     align-items: center;
     max-width: 1400px;
-    height: 200vh;
-    ;
-    margin-left: 00px;
+    height: auto;
+    margin-bottom: 50px;
+    overflow: hidden;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+
 }
 
 .image_content img {
@@ -50,7 +60,7 @@ header {
     border: 2px solid #6a42a1;
     border-radius: 10px;
     background-color: #3a1c6e;
-    height: 380px;
+    height: auto;
     width: 290px;
 }
 
@@ -265,7 +275,6 @@ h5 {
     margin-top: 20px;
 }
 
-
 .card_infos p,
 span {
     font-size: larger;
@@ -273,13 +282,10 @@ span {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-@media (max-width: 768px) {
-    .conteudo-principal {
-        flex-direction: column;
-    }
+footer {
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    padding-top: 20px;
 
-    .coluna-autoria {
-        width: 100%;
-        /* Ocupa a largura total */
-    }
 }
