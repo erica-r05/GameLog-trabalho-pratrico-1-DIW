@@ -32,7 +32,7 @@ header {
 
 }
 
-.btn-primary {
+.btn-primary { /*formatação do botão de voltar*/
     background: rgba(186, 118, 226, 0.7);
     color: white;
     border: none;
@@ -43,11 +43,11 @@ header {
     margin-left: 20%;
 }
 
-.btn-primary:hover {
+.btn-primary:hover { /*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
     background: rgba(87, 38, 128, 0.9) !important;
 }
 
-.container-detalhes {
+.container-detalhes { /*isso é pra formatar o conteudo todo da pagina praticamente*/
     max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
@@ -76,7 +76,7 @@ section {
     border-top: 1px solid #e0b3ff;
 }
 
-.conteudo_principal {
+.conteudo_principal { /*formatação do conteudo para mobile*/
     display: flex;
     gap: 30px;
     align-items: flex-start;
@@ -130,7 +130,7 @@ section {
     font-size: larger;
 }
 
-.galeria-fotos {
+.galeria-fotos { /*aqui ja começa a formatação das outras fotos*/
     display: flex;
     overflow-x: auto;
     gap: 10px;

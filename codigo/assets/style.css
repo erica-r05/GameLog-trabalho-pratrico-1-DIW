@@ -26,8 +26,50 @@ header {
 
 
 }
+.carousel-fixed-height {
+    max-height: 500px;
+    overflow: hidden;
+    width: 90%;
+    object-fit: cover;
+    position: relative;
+    max-width: 90%;
+    margin: 0 auto;
+}
 
-.categoria-grid {
+.carousel-item { /*formatação da div do conteudo do carrossel*/
+    flex: 0 0 100%;
+    position: relative;
+    height: 70vh;
+}
+
+.carousel-item img { /*formatação da imagem do carrossel*/
+    height: 500px;
+    object-fit: cover;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.carousel-caption { /*formatação das legendas do carrossel*/
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    z-index: 2;
+    color: white;
+    max-width: 600px;
+}
+.slide-overlay { /*formatação da div que eu coloquei pra dar uma sombrinha no carrossel*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+}
+.categoria-grid { /*formatação dos cards agora*/
     align-items: center;
     max-width: 1400px;
     height: auto;
@@ -39,16 +81,16 @@ header {
 
 }
 
-.image_content img {
+.image_content img { /*formatação da imagem */
     width: 180px;
     height: 200px;
 }
 
-.card_infos {
+.card_infos { /*formatação da info*/
     margin-top: 10px !important;
 }
 
-.card-content {
+.card-content { /*formatação do conteudo*/
     text-align: center;
     margin-right: 10px;
     margin-left: 25px;
@@ -67,7 +109,7 @@ header {
 h1,
 h2,
 h3,
-h4 {
+h4 { /*formatação padrão dos titulos*/
     color: #e0b3ff !important;
     text-align: center !important;
     margin-left: 40px !important;
@@ -86,21 +128,8 @@ h5 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     font-size: xx-large !important;
 }
-
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 50%,
-            rgba(0, 0, 0, 0) 100%);
-    z-index: 1;
-}
-
-.game-title {
+ 
+.game-title { 
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 0px;
@@ -122,7 +151,7 @@ h5 {
     color: #e0e0e0;
 }
 
-.btn-info {
+.btn-info { /*botões pra ir pros detalhes dos cards né*/
     background: rgba(186, 118, 226, 0.7);
     color: white;
     border: none;
@@ -131,16 +160,15 @@ h5 {
     font-size: 0.6rem;
     font-weight: smaller;
     cursor: pointer;
-    /*mudança suavee*/
     margin-top: 20px;
 
 }
 
-.btn-info:hover {
+.btn-info:hover {/*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
     background: rgba(87, 38, 128, 0.9);
 }
 
-.prev-btn {
+.prev-btn { /*queria arrumar a posição dos botões do carrossel*/
     left: 20px;
 }
 
@@ -148,39 +176,7 @@ h5 {
     right: 20px;
 }
 
-.carousel-fixed-height {
-    max-height: 500px;
-    overflow: hidden;
-    width: 90%;
-    object-fit: cover;
-    position: relative;
-    max-width: 90%;
-    margin: 0 auto;
-}
-
-.carousel-item {
-    flex: 0 0 100%;
-    position: relative;
-    height: 70vh;
-}
-
-.carousel-item img {
-    height: 500px;
-    object-fit: cover;
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.carousel-caption {
-    position: absolute;
-    bottom: 10%;
-    left: 10%;
-    z-index: 2;
-    color: white;
-    max-width: 600px;
-}
-
-.btn-primary {
+.btn-primary {/*botões pra ir pros detalhes do carrossel né*/
     background: rgba(186, 118, 226, 0.7) !important;
     color: white !important;
     border: none !important;
@@ -192,11 +188,11 @@ h5 {
     margin-top: 90px !important;
 }
 
-.btn-primary:hover {
+.btn-primary:hover {/*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
     background: rgba(87, 38, 128, 0.9) !important;
 }
 
-.informacoes-aluno-container {
+.informacoes-aluno-container { /*daqui ja começa a formatação do footer e do conteudo do footer*/
     max-width: 1000px;
     margin: auto;
     margin-top: 35px;

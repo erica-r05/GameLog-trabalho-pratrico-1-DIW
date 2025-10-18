@@ -223,7 +223,7 @@ function carregarDetalhes() { /*função pra carregar os detalhes*/
         console.error("Elemento com ID 'informacoes_gerais' não encontrado.");
         return;
     }
-    /*busca a descrição etc*/
+    /*busca a descrição*/
     informacoesGeraisContainer.innerHTML = `
         <section class="informacoes_gerais">
             <h2>${item.nome}</h2>
