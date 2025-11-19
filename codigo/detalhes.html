@@ -1,0 +1,48 @@
+<!DOCTYPE html><!--estrutura da paguna de detalhes dos games-->
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/detalhes.css">
+    <title>Game Details</title>
+</head>
+<body>
+    <div class="container-detalhes">
+        <div class="logo-voltar"> <!--div com a logo e o botão de voltar-->
+            <img src="img/logo.png" alt="GameLog">
+            <button class="btn btn-primary" onclick="voltarParaHome()"><strong>Voltar</strong></button>
+        </div>
+        <header>
+            <h1>Game Details</h1>
+        </header>
+        <main>
+            <section id="informacoes_gerais"> <!--informaçoes como nome do game e a foto principal q eu escolhi-->
+                <h2>Title</h2>
+                <div class="conteudo_principal">
+                    <div class="imagem_representativa">
+                        <img id="imagem-principal" src="" alt="">
+                    </div>
+                    <div class="detalhes_texto">
+                        <ul>
+                            <li><span class="label"></span></li>
+                            <li><span class="label"></span></li>
+                            <li><span class="label"></span></li>
+                            <li><span class="label"></span></li>
+                            <li><span class="label"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="fotos_associadas">
+                <h3></h3>
+                <div class="galeria-thumbnails" id="galeria-thumbnails-container"><!--aqui ja é a parte das outras fotos-->
+                </div>
+            </section>
+        </main>
+        <script src="assets/app.js"></script>
+        <footer>
+            <p>&copy; 2024 GameLog</p>
+        </footer>
+    </div>
+</body>
+</html>

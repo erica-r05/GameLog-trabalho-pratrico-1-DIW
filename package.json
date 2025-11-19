@@ -1,0 +1,25 @@
+{
+  "name": "gamelog-trabalho-pratrico-1-diw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db/db.json --port 3000 --static ./codigo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erica-r05/GameLog-trabalho-pratrico-1-DIW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/erica-r05/GameLog-trabalho-pratrico-1-DIW/issues"
+  },
+  "homepage": "https://github.com/erica-r05/GameLog-trabalho-pratrico-1-DIW#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
