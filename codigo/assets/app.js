@@ -6,46 +6,31 @@ function voltarParaHome() {
 function irParaDetalhe(itemId) {
     window.location.href = "detalhes.html?id=" + itemId;
 }
-
-// ----------------------------------------------------
-// Função para Carregar Detalhes (Página detalhes.html)
-// ----------------------------------------------------
-// NO SEU app.js
 async function carregarDetalhes() {
     const urlParams = new URLSearchParams(window.location.search);
     const itemId = urlParams.get('id');
     const detalhesContainer = document.getElementById('informacoes_gerais');
-
-    // ... (verifica se o container e o ID existem) ...
     if (!detalhesContainer) {
         console.warn("Elemento 'informacoes_gerais' não encontrado.");
         return;
     }
-
     if (!itemId) {
         detalhesContainer.innerHTML = '<p>Erro: ID do item faltando na URL.</p>';
         return;
     }
 
     try {
-        // MUDANÇA CRÍTICA: USAR FILTRO ?id=
-        // Isso busca a coleção "detalhesdoItem" e filtra o item com o ID correspondente.
         const endpoint = `http://localhost:3000/detalhesdoItem?id=${itemId}`;
         const response = await fetch(endpoint);
 
         if (response.ok) {
-            // O filtro retorna SEMPRE um array, mesmo que com 1 item: [ { ... } ]
             const itens = await response.json(); 
-            const item = itens[0]; // Pegamos o primeiro (e único) item do array
-
-            
-            // Verifica se o item foi encontrado no array
+            const item = itens[0];
             if (!item || !item.nome) {
                 detalhesContainer.innerHTML = '<p>Erro: Item não encontrado na API.</p>';
                 return;
             }
-
-            // Inserção do HTML principal (usa o objeto 'item' encontrado)
+            // Inserção do HTML principal
             detalhesContainer.innerHTML = `
                 <section class="informacoes_gerais">
                     <h2>${item.nome}</h2>
@@ -70,8 +55,7 @@ async function carregarDetalhes() {
                         </div>
                 </section>
             `;
-            
-            // Inserção das fotos na galeria
+            // Inserção das fotos associadas
             const galeriaContainer = document.getElementById('galeria-thumbnails-container');
             if (galeriaContainer && item.fotos && Array.isArray(item.fotos)) {
                 item.fotos.forEach(fotoUrl => {
@@ -87,18 +71,11 @@ async function carregarDetalhes() {
         detalhesContainer.innerHTML = '<p>Erro: Falha na conexão com o servidor da API.</p>';
     }
 }
-
-// ----------------------------------------------------
-// Função para Carregar a Home (Página index.html)
-// ----------------------------------------------------
 async function carregarHome() {
     const entidades = {
-        // CORRETO: Aponta para o contêiner PAI <div class="categoria-grid">
         jogos: '.categoria-grid' 
     };
-
     for(const [entidade, containerId] of Object.entries(entidades)) {
-        // Uso correto do querySelector para a classe
         const container = document.querySelector(containerId); 
         
         if (!container) {
@@ -112,12 +89,9 @@ async function carregarHome() {
             
             if (response.ok) {
                 const itens = await response.json();
-                
-                // Limpa o contêiner PAI para remover os cards estáticos
-                container.innerHTML = ''; 
-                
+                container.innerHTML = ''; // Limpa o contêiner antes de adicionar novos itens
+                // Gera o HTML para cada item
                 itens.forEach(item => {
-                    // Estrutura simplificada do card (sem o div.categoria-grid redundante)
                     const cardHTML = `
                         <div class="card-content">
                             <div class="image_content">
@@ -146,25 +120,14 @@ async function carregarHome() {
         }
     }
 }
-
-// Inicia as funções dependendo da página em que o script está
 document.addEventListener('DOMContentLoaded', () => {
-    // Verifica se estamos na página inicial (index.html)
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
         carregarHome();
     } 
-    // Verifica se estamos na página de detalhes (detalhes.html)
     else if (window.location.pathname.includes('detalhes.html')) {
         carregarDetalhes();
     }
 });
-// ... (mantenha todas as funções de navegação e carregarDetalhes/carregarHome corrigidas)
-
-// ----------------------------------------------------
-// Nova Função para Carregar o Carrossel (Página index.html)
-// ----------------------------------------------------
-// NO SEU app.js
-// NO SEU app.js
 async function carregarCarrossel() {
     const container = document.querySelector('.carousel-inner');
     const indicatorsContainer = document.querySelector('.carousel-indicators');
@@ -174,33 +137,23 @@ async function carregarCarrossel() {
         console.error("Contêiner do carrossel ou indicadores não encontrado.");
         return;
     }
-    
-    // ... (restante do try/catch) ...
     try {
         const endpoint = `http://localhost:3000/destaques`; 
         const response = await fetch(endpoint);
         
         if (response.ok) {
             const jogos = await response.json();
-            
-            // 1. Limpa o conteúdo estático
             container.innerHTML = '';
             indicatorsContainer.innerHTML = '';
-
-            // 2. REINSERE O OVERLAY 
             container.innerHTML += '<div class="slide-overlay"></div>'; 
 
             jogos.forEach((item, index) => {
                 const isActive = index === 0 ? ' active' : '';
-                
-                // CRIA OS INDICADORES
                 const indicatorHTML = `
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${index}" 
                         class="${isActive}" aria-current="${index === 0}" aria-label="Slide ${index + 1}"></button>
                 `;
                 indicatorsContainer.innerHTML += indicatorHTML;
-
-                // CRIA O ITEM (SLIDE)
                 const carouselItemHTML = `
                     <div class="carousel-item${isActive}">
                         <img src="${item.imagem}" class="d-block w-100" alt="${item.nome}">
@@ -215,12 +168,10 @@ async function carregarCarrossel() {
                 `;
                 container.innerHTML += carouselItemHTML;
             });
-            
-            // 🚨 A MUDANÇA MAIS IMPORTANTE: INICIALIZAÇÃO MANUAL 🚨
-            // Após injetar o HTML dinâmico, o carrossel deve ser reativado pelo JS do Bootstrap
+            // Inicializa o carrossel do Bootstrap
             new bootstrap.Carousel(carrosselElement, {
-                interval: 5000, // Opcional: define o tempo de slide (5 segundos)
-                wrap: true      // Opcional: permite ir do último ao primeiro slide
+                interval: 5000, 
+                wrap: true
             });
 
 
@@ -233,7 +184,7 @@ async function carregarCarrossel() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
-        carregarCarrossel(); // CHAMA A NOVA FUNÇÃO
+        carregarCarrossel();
         carregarHome();
     } 
     else if (window.location.pathname.includes('detalhes.html')) {
