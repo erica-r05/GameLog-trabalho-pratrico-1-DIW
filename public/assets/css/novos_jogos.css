@@ -2,7 +2,7 @@
        
     .logo-voltar img {
     height: 120px;
-    margin-right: 100%;
+    margin-left: 6%;
     margin-top: 20%;
 }
 
@@ -10,7 +10,7 @@
     width: 20%;
     height: auto;
     margin-top: 2%;
-    margin-left: 5%;
+    margin-left: 6%;
 
 }
 
@@ -23,6 +23,10 @@
     transition: all 0.3s;
     margin-bottom: 10%;
     margin-left: 20%;
+}
+.header-actions {
+    margin-top: 6%;
+    margin-right: 9%;
 }
 
 .btn-voltar:hover { /*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
