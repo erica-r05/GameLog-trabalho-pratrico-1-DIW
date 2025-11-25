@@ -208,8 +208,139 @@ async function carregarDetalhes() {
         detalhesContainer.innerHTML = '<p>Erro: Falha na conexão com o servidor da API.</p>';
     }
 }
+// --- CONFIGURAÇÕES DO JSON SERVER E USUÁRIO ---
+const JSON_SERVER_GAMES_URL = 'http://localhost:3000/jogos'; 
+const CURRENT_USER_ID = 1; 
 
-// Run page-specific initializers when the DOM is ready
+let metricsChartInstance = null;
+let allMetricsData = null; // Variável global para armazenar os dados das métricas
+
+// Mapeamento dos valores das opções do select para títulos e cores
+const METRICS_MAP = {
+    'total_plataforma': { label: 'Jogos Totais na Plataforma', color: 'rgba(54, 162, 235, 0.7)' },
+    'cadastrados_usuario': { label: 'Jogos Cadastrados por Você', color: 'rgba(75, 192, 192, 0.7)' },
+    'favoritados': { label: 'Jogos Favoritados', color: 'rgba(255, 99, 132, 0.7)' },
+    'all': { label: 'Comparativo de Jogos', color: null } // Valor para o comparativo
+};
+async function fetchAndCalculateMetrics() {
+    try {
+        const response = await fetch(JSON_SERVER_GAMES_URL);
+        if (!response.ok) {
+            throw new Error(`Erro HTTP! Status: ${response.status}`);
+        }
+        const games = await response.json(); 
+
+        // Calcula e ARMAZENA as 3 métricas
+        allMetricsData = {
+            total_plataforma: games.length,
+            cadastrados_usuario: games.filter(game => String(game.userId) === String(CURRENT_USER_ID)).length,
+            favoritados: games.filter(game => game.isFavorite === true).length
+        };
+        
+        // Após o cálculo, chama a função de renderização com o filtro atual
+        const currentFilter = document.getElementById('metricsFilter').value;
+        renderizarGraficoMetricas(currentFilter);
+
+    } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        const chartContainer = document.getElementById('metricsBarChart').closest('div');
+        if (chartContainer) {
+             chartContainer.innerHTML = `<p class="alert alert-danger mt-3">Não foi possível carregar os dados. Server offline?</p>`;
+        }
+    }
+}
+
+/**
+ * Cria ou atualiza o Gráfico de Barras baseado no filtro selecionado.
+ * @param {string} filterValue - O valor (chave) selecionado no <select>.
+ */
+function renderizarGraficoMetricas(filterValue) {
+    if (!allMetricsData) return; // Não renderiza se os dados não foram carregados
+
+    const ctx = document.getElementById('metricsBarChart');
+    if (metricsChartInstance) {
+        metricsChartInstance.destroy();
+    }
+    
+    let labels = [];
+    let data = [];
+    let backgroundColors = [];
+    let title = '';
+
+    if (filterValue === 'all') {
+        // --- VISUALIZAÇÃO DE TODAS AS MÉTRICAS (COMPARATIVO) ---
+        labels = ['Total', 'Você', 'Favoritos'];
+        data = [allMetricsData.total_plataforma, allMetricsData.cadastrados_usuario, allMetricsData.favoritados];
+        backgroundColors = [METRICS_MAP.total_plataforma.color, METRICS_MAP.cadastrados_usuario.color, METRICS_MAP.favoritados.color];
+        title = METRICS_MAP.all.label;
+
+    } else {
+        // --- VISUALIZAÇÃO DE MÉTRICA ÚNICA (FILTRADA) ---
+        const metric = METRICS_MAP[filterValue];
+        labels = [metric.label]; // Apenas um label
+        data = [allMetricsData[filterValue]]; // Apenas um valor
+        backgroundColors = [metric.color];
+        title = metric.label;
+    }
+
+    metricsChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: `Contagem: ${title}`,
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            // ... (Opções do Chart.js)
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Quantidade de Jogos' },
+                    ticks: {
+                        callback: function(value) {if (value % 1 === 0) {return value;}}
+                    }
+                },
+                x: {
+                    title: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: title }
+            }
+        }
+    });
+}
+
+// --- INICIALIZAÇÃO E LISTENERS ---
+
+// Função para ser chamada quando um novo jogo é cadastrado ou favoritado
+const atualizarGraficoJogos = () => fetchAndCalculateMetrics(); 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const metricsFilter = document.getElementById('metricsFilter');
+    const refreshBtn = document.getElementById('refreshDataBtn');
+    
+    // 1. Carrega os dados na inicialização
+    fetchAndCalculateMetrics();
+    
+    // 2. Listener para o FILTRO: Redesenha o gráfico com os dados JÁ CARREGADOS
+    if (metricsFilter) {
+        metricsFilter.addEventListener('change', (e) => {
+            renderizarGraficoMetricas(e.target.value);
+        });
+    }
+
+    // 3. Listener para o Botão de ATUALIZAR: Refaz o fetch e o desenho
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', atualizarGraficoJogos);
+    }
+});
 document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
         carregarCarrossel();
