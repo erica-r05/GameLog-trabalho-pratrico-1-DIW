@@ -227,8 +227,8 @@ async function obterDadosFormulario() {
         });
     };
 
-    // Obter imagem principal
-    let imagemPrincipal = '';
+    // Obter imagem principal (verifica se há um novo arquivo ou usa o valor existente)
+    let imagemPrincipal = document.getElementById('imagemPrincipalBase64')?.value || '';
     const fileInput = document.getElementById('arquivoUpload');
     if (fileInput && fileInput.files.length > 0) {
         try {
@@ -247,10 +247,12 @@ async function obterDadosFormulario() {
     const descricao = document.getElementById('itemDescricao')?.value || '';
     const curiosidade = document.getElementById('itemCuriosidade')?.value || '';
     
-    // Obter imagens da galeria
+    // Obter imagens da galeria (verifica se há novos arquivos ou usa os valores existentes)
     const galeria = [];
     for (let i = 1; i <= 5; i++) {
         const fileInput = document.getElementById(`galeriaArquivoUpload_${i}`);
+        const hiddenInput = document.getElementById(`galeriaFotoBase64_${i}`);
+        
         if (fileInput && fileInput.files.length > 0) {
             try {
                 const base64 = await fileToBase64(fileInput.files[0]);
@@ -258,6 +260,9 @@ async function obterDadosFormulario() {
             } catch (error) {
                 console.error(`Erro ao processar imagem ${i} da galeria:`, error);
             }
+        } else if (hiddenInput && hiddenInput.value) {
+            // Se não houver novo arquivo, mas houver um valor no campo oculto, usa-o
+            galeria.push(hiddenInput.value);
         }
     }
     
@@ -271,7 +276,8 @@ async function obterDadosFormulario() {
         curiosidade,
         imagem: imagemPrincipal,
         galeria,
-        // Adicionar outros campos conforme necessário
+        // Garante que o usuário logado permaneça o mesmo
+        usuarioId: localStorage.getItem('usuarioLogadoId') || '1'
     };
 }
 
@@ -323,6 +329,10 @@ async function inserirItem() {
         // Obter dados do formulário e remover o ID para que o servidor gere um novo
         const dados = await obterDadosFormulario();
         delete dados.id; // Garantir que não enviamos um ID
+        
+        // Adicionar o ID do usuário logado
+        const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
+        dados.usuarioId = usuarioLogadoId;
         
         console.log('Dados do formulário:', dados);
         
@@ -418,6 +428,7 @@ async function inserirItem() {
         btnInserir.innerHTML = 'Tentar Novamente';
     }
 }
+
 async function carregarListagemCRUD() {
     const listaCorpo = document.querySelector('.listagem-corpo'); 
     
@@ -433,14 +444,21 @@ async function carregarListagemCRUD() {
         if (!response.ok) throw new Error('Erro ao carregar jogos');
         
         const itens = await response.json();
+        
+        // Obter o ID do usuário logado (simulado para teste)
+        const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
+        
+        // Filtrar itens para mostrar apenas os do usuário logado
+        const itensDoUsuario = itens.filter(item => String(item.usuarioId) === usuarioLogadoId);
+        
         listaCorpo.innerHTML = ''; // Limpa a mensagem de carregamento
         
-        if (itens.length === 0) {
+        if (itensDoUsuario.length === 0) {
             listaCorpo.innerHTML = '<p>Nenhum jogo cadastrado.</p>';
             return;
         }
         
-        itens.forEach(item => {
+        itensDoUsuario.forEach(item => {
             const row = document.createElement('div');
             row.className = 'listagem-row';
             
@@ -509,71 +527,227 @@ window.excluirItem = async function(itemId) {
             throw new Error('Erro ao excluir jogo. Verifique o console para mais detalhes.');
         }
     } catch (error) {
-        console.error('Erro ao excluir jogo:', error);
-        alert('Erro ao excluir jogo. Verifique o console para mais detalhes.');
-    }
-}
-
-// R - READ para Edição - Usa Paths
-async function preencherFormularioParaEdicao(itemId) {
-    try {
-        const response = await fetch(`http://localhost:3000/jogos/${itemId}`);
-        const jogo = await response.json();
-        
-        if (jogo) {
-            // Preencher campos do formulário
-            if (document.getElementById('itemId')) document.getElementById('itemId').value = jogo.id;
-            if (document.getElementById('itemNome')) document.getElementById('itemNome').value = jogo.nome || '';
-            if (document.getElementById('itemCategoria')) document.getElementById('itemCategoria').value = jogo.categoria || '';
-            if (document.getElementById('itemAvaliacao')) document.getElementById('itemAvaliacao').value = jogo.avaliacao || '';
-            if (document.getElementById('itemDataLancamento')) document.getElementById('itemDataLancamento').value = jogo.dataLancamento || '';
-            if (document.getElementById('itemDescricao')) document.getElementById('itemDescricao').value = jogo.descricao || '';
-            if (document.getElementById('itemCuriosidade')) document.getElementById('itemCuriosidade').value = jogo.curiosidade || '';
-            
-            // Preencher imagem principal
-            const previewImagem = document.getElementById('previewImagem');
-            const imagemPrincipalInput = document.getElementById('imagemPrincipalBase64');
-            if (jogo.imagem && previewImagem && imagemPrincipalInput) {
-                previewImagem.src = jogo.imagem;
-                previewImagem.style.display = 'block';
-                imagemPrincipalInput.value = jogo.imagem;
-            }
-            
-            // Preencher galeria de imagens
-            if (jogo.galeria && Array.isArray(jogo.galeria)) {
-                jogo.galeria.forEach((imagem, index) => {
-                    const i = index + 1;
-                    const preview = document.getElementById(`previewFoto_${i}`);
-                    const input = document.getElementById(`galeriaFotoBase64_${i}`);
-                    if (preview && input) {
-                        preview.src = imagem;
-                        preview.style.display = 'block';
-                        input.value = imagem;
-                    }
-                });
-            }
-            
-            // Rolar para o topo do formulário
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Atualizar o estado dos botões
-            const btnInserir = document.getElementById('btnInserir');
-            const btnAlterar = document.getElementById('btnAlterar');
-            const btnExcluir = document.getElementById('btnExcluir');
-            
-            if (btnInserir) btnInserir.disabled = true;
-            if (btnAlterar) btnAlterar.disabled = false;
-            if (btnExcluir) btnExcluir.disabled = false;
-        }
-    } catch (error) {
         console.error('Erro ao carregar jogo para edição:', error);
         alert('Erro ao carregar os dados do jogo para edição.');
     }
-}
+};
 
-// ------------------------------------
-// EVENT LISTENER PRINCIPAL
-// ------------------------------------
+// Função para preencher o formulário com os dados do jogo para edição
+window.preencherFormularioParaEdicao = async function(itemId) {
+    if (!itemId) {
+        console.error('ID do jogo não fornecido para edição');
+        return;
+    }
+        
+    try {
+        // Buscar os dados do jogo
+        const response = await fetch(`http://localhost:3000/jogos/${itemId}`);
+        if (!response.ok) throw new Error('Jogo não encontrado');
+            
+        const jogo = await response.json();
+            
+        // Buscar os detalhes do jogo
+        let detalhes = {};
+        try {
+            const detalhesResponse = await fetch(`http://localhost:3000/detalhesdoItem/${itemId}`);
+            if (detalhesResponse.ok) {
+                detalhes = await detalhesResponse.json();
+            }
+        } catch (e) {
+            console.warn('Não foi possível carregar os detalhes adicionais', e);
+        }
+            
+        // Preencher o formulário com os dados do jogo
+        document.getElementById('itemId').value = jogo.id || '';
+        document.getElementById('itemNome').value = jogo.nome || '';
+        document.getElementById('itemCategoria').value = jogo.categoria || '';
+        document.getElementById('itemAvaliacao').value = jogo.avaliacao || '';
+        document.getElementById('itemDataLancamento').value = jogo.dataLancamento || '';
+        document.getElementById('itemDescricao').value = detalhes.descricao || '';
+        document.getElementById('itemCuriosidade').value = detalhes.curiosidade || '';
+            
+        // Preencher imagem principal
+        const previewImagem = document.getElementById('previewImagem');
+        const imagemPrincipalInput = document.getElementById('imagemPrincipalBase64');
+            
+        if (detalhes.imagem_principal) {
+            previewImagem.src = detalhes.imagem_principal;
+            previewImagem.style.display = 'block';
+            imagemPrincipalInput.value = detalhes.imagem_principal;
+        } else if (jogo.imagem) {
+            previewImagem.src = jogo.imagem;
+            previewImagem.style.display = 'block';
+            imagemPrincipalInput.value = jogo.imagem;
+        } else {
+            previewImagem.style.display = 'none';
+            previewImagem.src = '';
+            imagemPrincipalInput.value = '';
+        }
+            
+        // Limpar todos os campos de galeria primeiro
+        for (let i = 1; i <= 5; i++) {
+            const preview = document.getElementById(`previewFoto_${i}`);
+            const hiddenInput = document.getElementById(`galeriaFotoBase64_${i}`);
+            if (preview) {
+                preview.style.display = 'none';
+                preview.src = '';
+            }
+            if (hiddenInput) {
+                hiddenInput.value = '';
+            }
+        }
+            
+        // Preencher galeria de imagens
+        if (detalhes.fotos && Array.isArray(detalhes.fotos)) {
+            detalhes.fotos.forEach((foto, index) => {
+                const i = index + 1;
+                const preview = document.getElementById(`previewFoto_${i}`);
+                const hiddenInput = document.getElementById(`galeriaFotoBase64_${i}`);
+                    
+                if (preview && hiddenInput && foto) {
+                    preview.src = foto;
+                    preview.style.display = 'block';
+                    hiddenInput.value = foto;
+                }
+            });
+        }
+            
+        // Atualizar o estado dos botões
+        const btnInserir = document.querySelector('.btn-inserir');
+        const btnAlterar = document.querySelector('.btn-alterar');
+        const btnExcluir = document.querySelector('.btn-excluir');
+            
+        if (btnInserir) {
+            btnInserir.disabled = true;
+            btnInserir.classList.remove('btn-primary');
+            btnInserir.classList.add('btn-secondary');
+        }
+            
+        if (btnAlterar) {
+            btnAlterar.disabled = false;
+            btnAlterar.classList.remove('btn-secondary');
+            btnAlterar.classList.add('btn-primary');
+        }
+            
+        if (btnExcluir) {
+            btnExcluir.disabled = false;
+        }
+            
+        // Rolar para o topo do formulário
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+    } catch (error) {
+        console.error('Erro ao carregar jogo para edição:', error);
+        alert('Erro ao carregar os dados do jogo para edição: ' + error.message);
+    }
+};
+
+// U - UPDATE (Atualizar)
+window.alterarItem = async function() {
+    const itemId = document.getElementById('itemId')?.value;
+    if (!itemId) {
+        alert('Nenhum jogo selecionado para edição');
+        return;
+    }
+
+    const btnAlterar = document.querySelector('.btn-alterar');
+    const originalText = btnAlterar?.innerHTML;
+    
+    try {
+        // Mostrar indicador de carregamento
+        if (btnAlterar) {
+            btnAlterar.disabled = true;
+            btnAlterar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
+        }
+
+        // Obter os dados atualizados do formulário
+        const dadosAtualizados = await obterDadosFormulario();
+        
+        // Atualizar na tabela de jogos
+        const response = await fetch(`http://localhost:3000/jogos/${itemId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ...dadosAtualizados, id: itemId })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || 'Erro ao atualizar o jogo');
+        }
+
+        // Atualizar na tabela de detalhes
+        const detalhesAtualizados = {
+            id: itemId,
+            nome: dadosAtualizados.nome,
+            categoria: dadosAtualizados.categoria,
+            dataLancamento: dadosAtualizados.dataLancamento || 'Data não especificada',
+            descricao: dadosAtualizados.descricao || 'Descrição não fornecida',
+            curiosidade: dadosAtualizados.curiosidade || 'Curiosidade não fornecida',
+            imagem_principal: dadosAtualizados.imagem,
+            fotos: dadosAtualizados.galeria || []
+        };
+
+        const detalhesResponse = await fetch(`http://localhost:3000/detalhesdoItem/${itemId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(detalhesAtualizados)
+        });
+
+        if (!detalhesResponse.ok) {
+            throw new Error('Erro ao atualizar os detalhes do jogo');
+        }
+
+        // Feedback de sucesso
+        if (btnAlterar) {
+            btnAlterar.innerHTML = '<i class="bi bi-check-circle"></i> Atualizado!';
+            btnAlterar.classList.remove('btn-primary');
+            btnAlterar.classList.add('btn-success');
+        }
+
+        // Atualizar a listagem
+        await carregarListagemCRUD();
+        
+        // Atualizar a home se estiver em outra página
+        if (typeof carregarHome === 'function') {
+            carregarHome();
+        }
+
+        // Resetar o botão após 2 segundos
+        setTimeout(() => {
+            if (btnAlterar) {
+                btnAlterar.disabled = false;
+                btnAlterar.innerHTML = originalText;
+                btnAlterar.classList.remove('btn-success');
+                btnAlterar.classList.add('btn-primary');
+            }
+            
+            // Limpar o formulário após atualização
+            limparFormulario();
+            
+            // Habilitar botão de inserir e desabilitar os outros
+            const btnInserir = document.querySelector('.btn-inserir');
+            const btnExcluir = document.querySelector('.btn-excluir');
+            
+            if (btnInserir) btnInserir.disabled = false;
+            if (btnExcluir) btnExcluir.disabled = true;
+            
+        }, 2000);
+
+    } catch (error) {
+        console.error('Erro ao atualizar jogo:', error);
+        alert(error.message || 'Erro ao atualizar o jogo. Verifique o console para mais detalhes.');
+        
+        // Reativar o botão em caso de erro
+        if (btnAlterar) {
+            btnAlterar.disabled = false;
+            btnAlterar.innerHTML = 'Tentar Novamente';
+        }
+    }
+};
 
 document.addEventListener('DOMContentLoaded', function() {
     // Configurar eventos dos botões na página de cadastro
