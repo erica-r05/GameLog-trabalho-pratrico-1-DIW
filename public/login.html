@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameLog - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .login-title {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            background: #e50914;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-login:hover {
+            background: #f40612;
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #fff;
+        }
+        .register-link a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h1 class="login-title">Entrar no GameLog</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+            <div class="register-link">
+                Novo no GameLog? <a href="cadastro.html">Cadastre-se agora</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const btnLogin = document.querySelector('.btn-login');
+        btnLogin.disabled = true;
+        try {
+            const response = await fetch(`http://localhost:3000/users?email=${email}&password=${password}`);
+            const users = await response.json();
+            if (response.ok && users.length === 1) {
+                const user = users[0];
+                const fakeToken = 'simulated_token_' + user.id + '_' + Date.now(); 
+                localStorage.setItem('token', fakeToken);
+                localStorage.setItem('usuarioLogadoId', user.id); 
+                localStorage.setItem('usuarioLogadoNome', user.nome);
+                localStorage.setItem('user', JSON.stringify(user));
+                alert('Login realizado com sucesso! Bem-vindo(a) ');
+                window.location.href = 'index.html';
+            } else {
+                alert('E-mail ou senha incorretos.');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao conectar ao servidor. Verifique se o json-server está ativo.');
+        } finally {
+            btnLogin.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

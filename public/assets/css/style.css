@@ -124,6 +124,7 @@ header {
     background-color: #3a1c6e;
     height: 400px;
     width: 290px;
+    position: relative; 
 }
 
 h1,
@@ -304,4 +305,31 @@ footer {
     margin-top: 50px;
     padding-top: 20px;
 
+}
+/* Posição e aparência do ícone de coração */
+.favorite-icon {
+    position: absolute;
+    top: 15px;        /* Posição vertical: 15px da borda superior do card */
+    right: 15px;      /* Posição horizontal: 15px da borda direita do card */
+    font-size: 26px;  /* Tamanho do ícone (aumentado um pouco) */
+    cursor: pointer;
+    color: #f1f1f1;   /* Cor padrão: Cinza bem claro (quase branco) */
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Sombra para dar destaque em fundos claros */
+    transition: color 0.3s ease;
+    color: rgba(255, 255, 255, 0.4); /* Cor padrão: Branco com transparência */
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+/* Cor do coração quando ele está ativo/favoritado */
+.favorite-icon.favorited {
+    /* MUDANÇA PRINCIPAL: Cor vermelha e opaca */
+    color: #da2626; /* Vermelho Vivo */
+    
+    /* Opcional: Efeito de pulso para feedback visual */
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(171, 36, 36, 0.6)); /* Adiciona um brilho vermelho */
+}
+/* Deixa o coração um pouco mais visível ao passar o mouse */
+.favorite-icon:hover:not(.favorited) {
+    color: rgba(255, 255, 255, 0.7); /* Fica 70% opaco ao passar o mouse */
 }

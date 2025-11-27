@@ -20,7 +20,7 @@
     {
       "nome": "Fortnite",
       "categoria": "Battle Royale",
-      "avaliacao": "undefined",
+      "avaliacao": "4.5/5",
       "imagem": "assets/img/imgs/cards/Fornite logo 2024.jpg",
       "id": "3"
     },
@@ -286,5 +286,17 @@
         "assets/img/imgs/cards/ff-4.jpg"
       ]
     }
-  ]
+  ],
+  "users": [
+    {
+      "id": "fa05",
+      "firstName": "Erica",
+      "lastName": "Martins",
+      "email": "ericareginasilvamartins3@gmail.com",
+      "password": "erica123",
+      "birthDate": "2005-10-11",
+      "gender": "feminino"
+    }
+  ],
+  "favorites": []
 }

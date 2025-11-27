@@ -67,7 +67,7 @@ async function obterDadosFormulario() {
         imagem: imagemPrincipal,
         galeria,
         // Garante que o usuário logado permaneça o mesmo
-        usuarioId: localStorage.getItem('usuarioLogadoId') || '1'
+        userId: localStorage.getItem('usuarioLogadoId') || '1'
     };
 }
 
@@ -122,7 +122,7 @@ async function inserirItem() {
         
         // Adicionar o ID do usuário logado
         const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
-        dados.usuarioId = usuarioLogadoId;
+        dados.userId = usuarioLogadoId;
         
         console.log('Dados do formulário:', dados);
         
@@ -239,7 +239,7 @@ async function carregarListagemCRUD() {
         const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
         
         // Filtrar itens para mostrar apenas os do usuário logado
-        const itensDoUsuario = itens.filter(item => String(item.usuarioId) === usuarioLogadoId);
+        const itensDoUsuario = itens.filter(item => String(item.userId) === usuarioLogadoId);
         
         listaCorpo.innerHTML = ''; // Limpa a mensagem de carregamento
         

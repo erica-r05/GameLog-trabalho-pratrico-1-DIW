@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameLog - Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .register-container {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .register-title {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .btn-register {
+            width: 100%;
+            padding: 0.8rem;
+            background: #e50914;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        .btn-register:hover {
+            background: #f40612;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #fff;
+        }
+        .login-link a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-container">
+            <h1 class="register-title">Criar Conta</h1>
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nome</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                    <div id="emailError" class="error-message">E-mail já cadastrado</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" minlength="6" required>
+                        <div id="passwordError" class="error-message">A senha deve ter pelo menos 6 caracteres</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <div id="confirmPasswordError" class="error-message">As senhas não conferem</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">Data de Nascimento</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gênero</label>
+                    <select id="gender" name="gender">
+                        <option value="">Selecione...</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                        <option value="prefiro-nao-dizer">Prefiro não dizer</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-register">Cadastrar</button>
+            </form>
+            
+            <div class="login-link">
+                Já tem uma conta? <a href="login.html">Faça login</a>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const birthDate = document.getElementById('birthDate').value;
+        const gender = document.getElementById('gender').value;
+        if (password.length < 6) {
+            document.getElementById('passwordError').style.display = 'block';
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            document.getElementById('confirmPasswordError').style.display = 'block';
+            return;
+        }
+        
+        try {
+            const response = await fetch('http://localhost:3000/users', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password, 
+                    birthDate,
+                    gender
+                })
+            });
+            if (response.status === 201) { 
+                alert('Cadastro realizado com sucesso! Faça login para continuar.');
+                window.location.href = 'login.html';
+            } else {
+                const data = await response.json();
+                alert(data.message || `Erro ao realizar cadastro (Status: ${response.status})`);
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao conectar ao servidor. Verifique se o json-server está rodando (npm run start).');
+        }
+    });
+    document.getElementById('birthDate').max = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
