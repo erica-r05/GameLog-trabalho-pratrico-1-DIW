@@ -136,7 +136,7 @@ async function adicionarAosFavoritos(gameId) {
             body: JSON.stringify(novoFavorito)
         });
         if (response.ok) {
-            alert(`Jogo ID ${selectedGameId} adicionado aos favoritos com sucesso!`);
+            alert(`Jogo adicionado aos favoritos com sucesso!`);
             
             const iconElement = document.getElementById(`fav-${selectedGameId}`);
             if (iconElement) {
