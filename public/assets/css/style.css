@@ -333,3 +333,285 @@ footer {
 .favorite-icon:hover:not(.favorited) {
     color: rgba(255, 255, 255, 0.7); /* Fica 70% opaco ao passar o mouse */
 }
+/* --- Estilização do Campo de Pesquisa --- */
+
+.search-container {
+    /* Centraliza o contêiner de pesquisa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Define a largura máxima e adiciona margem */
+    max-width: 700px;
+    width: 90%;
+    margin: 30px auto 30px auto; 
+    
+    /* Habilita o posicionamento absoluto/relativo para o ícone */
+    position: relative;
+}
+#searchInput {
+    /* Ocupa a largura total do contêiner */
+    width: 100%; 
+    padding: 12px 45px 12px 15px; /* Padding ajustado para o ícone */
+    
+    /* Aparência */
+    border: 2px solid #333; /* Borda escura */
+    border-radius: 25px; 
+    font-size: 16px;
+    outline: none;
+    
+    /* Transição suave para o foco */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #2d2033; /* Fundo escuro */
+    color: #f0f0f0; /* Texto claro */
+}
+
+#searchInput:focus {
+    /* Efeito ao focar */
+    border-color: #007bff; /* Exemplo de cor de destaque (Azul) */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Garante que o placeholder tenha uma cor visível no tema escuro */
+#searchInput::placeholder {
+    color: #aaa;
+}
+.search-container .fa-search {
+    /* Posicionamento absoluto dentro do contêiner */
+    position: absolute;
+    right: 15px; 
+    
+    /* Estilo do ícone */
+    color: #aaa; /* Cor suave */
+    font-size: 18px;
+    pointer-events: none; /* Garante que o clique passe para o input */
+}
+/* ========================================================================= */
+/* --- MEDIA QUERIES PARA CARROSSEL E GRÁFICO --- */
+/* ========================================================================= */
+
+@media (max-width: 768px) {
+    
+    /* ------------------------------------------------ */
+    /* --- CARROSSEL --- */
+    /* ------------------------------------------------ */
+
+    .carousel-fixed-height {
+        width: 100%; /* Ocupa a largura total em telas menores */
+        max-width: 100%;
+        max-height: 350px; /* Reduz a altura máxima para não ocupar muito espaço vertical */
+    }
+
+    .carousel-item {
+        height: auto; /* Deixa o item se ajustar ao novo max-height */
+    }
+
+    .carousel-item img {
+        height: 350px; /* Ajusta a altura da imagem para o novo limite */
+    }
+
+    .carousel-caption {
+        bottom: 5%; /* Move a legenda um pouco para cima */
+        left: 5%;
+        right: 5%;
+        max-width: 90%;
+        padding: 0 10px; /* Adiciona um pequeno padding lateral */
+    }
+    
+    .carousel-caption h2 {
+        font-size: 1.5em !important; /* Reduz o tamanho do título */
+        margin-bottom: 5px !important;
+    }
+    
+    .carousel-caption p {
+        display: none; /* Esconde a descrição longa para economizar espaço */
+    }
+
+    .btn-primary {
+        padding: 8px 20px !important;
+        font-size: 0.9rem !important;
+        margin-top: 20px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Oculta os indicadores e controles do Bootstrap em telas muito pequenas, se necessário, 
+       mas geralmente é melhor mantê-los se houver espaço. Vamos ajustar o tamanho. */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 25px; 
+        height: 25px;
+    }
+    
+    /* ------------------------------------------------ */
+    /* --- GRÁFICO DE CATEGORIAS --- */
+    /* ------------------------------------------------ */
+    
+    /* A div que contém o canvas, com estilo inline 'width: 750px' no HTML */
+    div[style="width: 750px; margin: auto;"] {
+        width: 95% !important; /* Sobrescreve o estilo inline para ser responsivo */
+        max-width: 95%; 
+        margin: 30px auto; /* Garante centralização e margem */
+    }
+
+    /* O elemento canvas em si */
+    #graficoCategorias {
+        height: auto !important; /* Permite que a altura se ajuste à largura */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes extras para o carrossel em celulares muito pequenos */
+    .carousel-fixed-height {
+        max-height: 250px; 
+    }
+    
+    .carousel-item img {
+        height: 250px;
+    }
+    
+    .carousel-caption h2 {
+        font-size: 1.2em !important;
+    }
+    
+    .btn-primary {
+        padding: 6px 15px !important;
+        font-size: 0.75rem !important;
+    }
+}
+/* ========================================================================= */
+/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
+/* ========================================================================= */
+
+@media (max-width: 768px) {
+    
+    /* --- Layout Geral e Títulos --- */
+    
+    body {
+        /* Garante que o corpo docupe a tela em dispositivos móveis */
+        padding-bottom: 70px; /* Adiciona espaço para evitar que o footer cubra conteúdo */
+    }
+
+    h1, h2, h3, h4, h5 {
+        /* Ajusta margens e centraliza títulos para telas menores */
+        margin-left: 0 !important;
+        font-size: 1.8em !important; 
+        text-align: center !important;
+        margin-top: 15px !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* --- Header e Ações --- */
+    
+    header {
+        /* Permite que o header ocupe a largura total */
+        height: auto;
+        padding: 10px 10px;
+        flex-direction: column; /* Empilha logo e ações verticalmente */
+    }
+    
+    #logo {
+        width: 150px; /* Reduz o tamanho do logo */
+        height: 75px;
+        margin-bottom: 10px;
+    }
+
+    #logo img {
+        height: 75px;
+        margin-bottom: 0; /* Remove margem desnecessária */
+    }
+    
+    .header-actions {
+        justify-content: center; /* Centraliza botões */
+        margin: 5px 0;
+        flex-wrap: wrap; /* Permite que os botões quebrem linha */
+    }
+    
+    .btn-actions {
+        padding: 8px 15px; /* Reduz o padding do botão */
+        font-size: 0.9rem;
+    }
+
+    /* --- Campo de Pesquisa --- */
+    
+    .search-container {
+        margin: 20px auto;
+        width: 95%; 
+        max-width: none; 
+    }
+
+    #searchInput {
+        font-size: 14px;
+        padding: 10px 40px 10px 12px; 
+    }
+    
+    .search-container .fa-search {
+        right: 12px; 
+        font-size: 16px;
+    }
+
+    /* --- Grid de Cards (Jogos) --- */
+    
+    .categoria-grid {
+        display: flex;
+        flex-direction: column; /* Empilha os cards verticalmente */
+        align-items: center;
+        max-width: 100%; 
+        margin-bottom: 30px;
+    }
+
+    .card-content {
+        width: 90%; /* Ocupa a maior parte da largura da tela */
+        max-width: 350px; /* Define um limite para o tamanho do card */
+        margin: 15px 0;
+        height: auto; /* Permite que a altura se ajuste ao conteúdo */
+        padding-bottom: 20px;
+    }
+    
+    .image_content img {
+        width: 100%; /* Imagem se ajusta à largura do card */
+        max-width: 180px; 
+        height: auto;
+    }
+    
+    .card_infos p, span {
+        font-size: medium; /* Reduz o tamanho da fonte das infos do card */
+    }
+    
+    .btn-info {
+        font-size: 0.8rem;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-actions {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    #searchInput {
+        padding: 8px 35px 8px 10px;
+    }
+    
+    .search-container .fa-search {
+        right: 10px; 
+        font-size: 14px;
+    }
+    
+    /* Reduz ainda mais o tamanho da fonte em geral para caber */
+    h1, h2, h5 {
+        font-size: 1.5em !important;
+    }
+    
+    .carousel-item img {
+        height: 250px; 
+    }
+    
+    .carousel-caption h2 {
+        font-size: 1.2em !important;
+    }
+
+    .card-content {
+        max-width: 300px;
+    }
+}

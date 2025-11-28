@@ -1,17 +1,13 @@
-// auth.js - Shared authentication functions
-
-// Check if user is authenticated
+/*checa se o usuário está autenticado*/
 function isAuthenticated() {
     return !!localStorage.getItem('token');
 }
-
-// Get current user data
+/*pega os dados do usuário armazenados no localStorage*/
 function getCurrentUser() {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
 }
-
-// Redirect to login if not authenticated
+/*redireciona para a página de login se o usuário não estiver autenticado*/
 function requireAuth() {
     if (!isAuthenticated()) {
         window.location.href = 'login.html';
@@ -19,47 +15,32 @@ function requireAuth() {
     }
     return true;
 }
-
-// Update UI based on authentication status
+/*atualiza a interface com base no estado de autenticação do usuário*/
 function updateAuthUI() {
     const token = localStorage.getItem('token');
-    
-    // 1. Referências para os botões de LOGIN/CADASTRO (visíveis quando DESLOGADO)
+    /*Referências para os botões de LOGIN/CADASTRO (visíveis quando DESLOGADO)*/
     const authButtons = document.getElementById('authButtons'); 
-    
-    // 2. Referência para o novo grupo de ações do usuário (visível quando LOGADO)
+    /*Referência para o novo grupo de ações do usuário (visível quando LOGADO)*/
     const userActions = document.getElementById('userActions'); 
-
-    // Referências antigas que não usaremos mais para mostrar o nome (mas mantemos para o resto)
     const favoritesLink = document.getElementById('favoritesLink');
     const protectedLinks = document.querySelectorAll('[data-protected]');
-
     if (token) {
-        // Usuário está logado
-        
-        // Esconde o botão de Login/Cadastro
+        /* Usuário está logado*/
+        /* Esconde o botão de Login/Cadastro*/
         if (authButtons) authButtons.style.display = 'none';
-        
-        // MOSTRA o grupo de ações logadas (Cadastrar Jogo, Favoritos, Logout)
+        /* mostra o grupo de ações logadas (Cadastrar Jogo, Favoritos, Logout)*/
         if (userActions) userActions.style.display = 'inline-block';
-        
-        // Não é mais necessário: userName.textContent = user.firstName || 'Usuário';
-
-        // Mantém a exibição de outros links protegidos (se existirem)
         if (favoritesLink) favoritesLink.style.display = 'inline-block';
         protectedLinks.forEach(link => {
             link.style.display = 'inline-block';
         });
 
     } else {
-        // Usuário não está logado
-        
-        // MOSTRA o botão de Login/Cadastro
+        /* Usuário não está logado*/
+        // Mostra o botão de Login/Cadastro
         if (authButtons) authButtons.style.display = 'inline-block';
-        
         // Esconde o grupo de ações logadas
         if (userActions) userActions.style.display = 'none';
-        
         // Oculta links protegidos
         if (favoritesLink) favoritesLink.style.display = 'none';
         protectedLinks.forEach(link => {
@@ -67,10 +48,7 @@ function updateAuthUI() {
         });
     }
 }
-
-// Initialize authentication
 function initAuth() {
-    // Add event listener for logout button
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
@@ -80,15 +58,9 @@ function initAuth() {
             window.location.href = 'index.html';
         });
     }
-    
-    // Update UI on page load
     updateAuthUI();
 }
-
-// Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', initAuth);
-
-// Export functions for use in other modules
 window.auth = {
     isAuthenticated,
     getCurrentUser,

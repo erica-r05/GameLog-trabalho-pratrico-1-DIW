@@ -288,15 +288,7 @@
     }
   ],
   "users": [
-    {
-      "id": "fa05",
-      "firstName": "Erica",
-      "lastName": "Martins",
-      "email": "ericareginasilvamartins3@gmail.com",
-      "password": "erica123",
-      "birthDate": "2005-10-11",
-      "gender": "feminino"
-    }
   ],
-  "favorites": []
+  "favorites": [
+  ]
 }

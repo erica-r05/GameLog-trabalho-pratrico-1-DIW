@@ -1,37 +1,56 @@
 
        
-    .logo-voltar img {
-    height: 120px;
-    margin-left: 6%;
-    margin-top: 20%;
-}
+   /*
+ * ASSUMIMOS QUE O ELEMENTO <header> OU O CONTÊINER PAI 
+ * TENHA 'display: flex' e 'justify-content: space-between' 
+ * para alinhar o logo (esquerda) e o botão (direita) horizontalmente.
+ */
+
+/* --- Logo Voltar --- */
 
 .logo-voltar {
     width: 20%;
     height: auto;
-    margin-top: 2%;
+    /* Correção: Remove margin-top excessiva e garante alinhamento básico */
+    margin-top: 0; 
     margin-left: 6%;
-
+    display: flex; /* Garante que a imagem se alinhe verticalmente */
+    align-items: center; 
 }
 
-.btn-voltar { /*formatação do botão de voltar*/
+.logo-voltar img {
+    height: 120px;
+    /* Correção: Remove as margens problemáticas que causavam desalinhamento */
+    margin-left: 0; 
+    margin-top: 0; 
+}
+
+/* --- Botão Voltar (Ações) --- */
+
+.header-actions {
+    display: flex;
+    align-items: center; /* Centraliza o botão verticalmente com o logo */
+    justify-content: flex-end; 
+    /* Correção: Remove margin-top excessivo */
+    margin-top: 0; 
+    margin-right: 9%;
+}
+
+.btn-voltar { 
     background: rgba(186, 118, 226, 0.7);
     color: white;
     border: none;
     padding: 12px 30px;
     border-radius: 4px;
     transition: all 0.3s;
-    margin-bottom: 10%;
-    margin-left: 20%;
-}
-.header-actions {
-    margin-top: 6%;
-    margin-right: 9%;
+    /* Correção: Remove margens de posição desnecessárias */
+    margin-bottom: 0; 
+    margin-left: 0;
 }
 
-.btn-voltar:hover { /*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
+.btn-voltar:hover {
     background: rgba(87, 38, 128, 0.9) !important;
-}/* --- ESTILOS ESPECÍFICOS PARA A TELA DE CRUD --- */
+}
         .crud-container {
             max-width: 900px; /* Limita a largura do formulário, como no wireframe */
             margin: 40px auto;
@@ -40,7 +59,7 @@
             border-radius: 10px;
             border: 2px solid #6a42a1;
             color: rgb(255, 255, 255);
-            margin-top: 10%;
+            margin-top: 5%;
         }
 
         .crud-title {
@@ -231,18 +250,133 @@
 .table tbody tr:hover {
     box-shadow: 0 4px 12px rgba(106, 66, 161, 0.1);
 }
-
-/* Responsividade */
 @media (max-width: 768px) {
-    .table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    
+    /* --- HEADER (Logo Voltar e Botões) --- */
+    
+    .logo-voltar {
+        width: 40%; /* Aumenta a largura relativa */
+        margin-top: 5%;
+        margin-left: 3%; /* Reduz a margem lateral */
+    }
+
+    .logo-voltar img {
+        height: 80px; /* Reduz o tamanho do logo */
+        margin-left: 0; /* Remove a margem esquerda extra */
+        margin-top: 0;
+    }
+
+    .header-actions {
+        /* Garante que o botão Voltar fique visível e centralizado */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5%;
+        margin-right: 0;
+        width: 100%; /* Ocupa a largura total para centralizar */
+    }
+
+    .btn-voltar {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        margin-bottom: 5%;
+        margin-left: 0; /* Centraliza melhor */
+    }
+
+    /* --- Contêiner Principal do CRUD --- */
+
+    .crud-container {
+        width: 95%; 
+        margin: 20px auto; /* Reduz margem superior */
+        padding: 15px;
+        margin-top: 5%;
+    }
+
+    .crud-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* --- Formulário e Inputs --- */
+
+    .form-control {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .crud-btn {
+        width: 100%; /* Botões de ação do formulário ocupam a largura total */
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* --- Listagem / Tabela --- */
+    
+    /* A regra de overflow-x: auto no @media (max-width: 768px) 
+       já garante que a tabela seja "scrollável" horizontalmente. */
+
+    .table th,
+    .table td {
+        padding: 0.8rem 0.5rem; /* Reduz o padding das células */
+        font-size: 0.85rem;
+        min-width: 100px; /* Reduz o tamanho mínimo das colunas para caber mais */
+    }
+    
+    .table th:first-child,
+    .table td:first-child {
+        padding-left: 0.8rem;
+    }
+
+    .table th:last-child,
+    .table td:last-child {
+        padding-right: 0.8rem;
+    }
+
+    .btn-editar,
+    .btn-excluir {
+        padding: 0.4rem 0.6rem; /* Reduz o tamanho dos botões da tabela */
+        font-size: 0.75rem;
+        margin: 2px;
+        display: block; /* Empilha os botões em telas pequenas */
+    }
+}
+
+
+@media (max-width: 480px) {
+    
+    .logo-voltar img {
+        height: 60px;
+    }
+    
+    .btn-voltar {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .crud-container {
+        padding: 10px;
+    }
+
+    .crud-title {
+        font-size: 1.1rem !important;
+    }
+    
+    .crud-btn {
+        padding: 8px;
+        font-size: 0.8rem;
     }
     
     .table th,
     .table td {
-        white-space: nowrap;
-        min-width: 120px;
+        padding: 0.6rem 0.4rem;
+        font-size: 0.75rem;
+        min-width: 80px;
+    }
+    
+    .btn-editar,
+    .btn-excluir {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.7rem;
     }
 }

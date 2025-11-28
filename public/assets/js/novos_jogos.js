@@ -1,7 +1,9 @@
 function voltarParaHome() {
     window.location.href = "index.html";
 }
-
+function irParaJogosFavoritos() {
+    window.location.href = "favoritos.html";
+}
 /**
  * Função auxiliar para obter os valores do formulário e construir os paths de imagem.
  * @returns {object} Objeto com os dados completos do formulário.
@@ -16,8 +18,6 @@ async function obterDadosFormulario() {
             reader.onerror = error => reject(error);
         });
     };
-
-    // Obter imagem principal (verifica se há um novo arquivo ou usa o valor existente)
     let imagemPrincipal = document.getElementById('imagemPrincipalBase64')?.value || '';
     const fileInput = document.getElementById('arquivoUpload');
     if (fileInput && fileInput.files.length > 0) {
@@ -27,8 +27,6 @@ async function obterDadosFormulario() {
             console.error('Erro ao processar imagem principal:', error);
         }
     }
-    
-    // Obter dados básicos
     const id = document.getElementById('itemId')?.value || null;
     const nome = document.getElementById('itemNome')?.value || '';
     const categoria = document.getElementById('itemCategoria')?.value || '';
@@ -36,13 +34,10 @@ async function obterDadosFormulario() {
     const dataLancamento = document.getElementById('itemDataLancamento')?.value || '';
     const descricao = document.getElementById('itemDescricao')?.value || '';
     const curiosidade = document.getElementById('itemCuriosidade')?.value || '';
-    
-    // Obter imagens da galeria (verifica se há novos arquivos ou usa os valores existentes)
     const galeria = [];
     for (let i = 1; i <= 5; i++) {
         const fileInput = document.getElementById(`galeriaArquivoUpload_${i}`);
         const hiddenInput = document.getElementById(`galeriaFotoBase64_${i}`);
-        
         if (fileInput && fileInput.files.length > 0) {
             try {
                 const base64 = await fileToBase64(fileInput.files[0]);
@@ -51,7 +46,6 @@ async function obterDadosFormulario() {
                 console.error(`Erro ao processar imagem ${i} da galeria:`, error);
             }
         } else if (hiddenInput && hiddenInput.value) {
-            // Se não houver novo arquivo, mas houver um valor no campo oculto, usa-o
             galeria.push(hiddenInput.value);
         }
     }
@@ -70,10 +64,6 @@ async function obterDadosFormulario() {
         userId: localStorage.getItem('usuarioLogadoId') || '1'
     };
 }
-
-/**
- * Limpa todos os campos do formulário e remove as pré-visualizações.
- */
 function limparFormulario() {
     document.getElementById('itemId').value = '';
     document.getElementById('itemNome').value = '';
@@ -82,16 +72,12 @@ function limparFormulario() {
     document.getElementById('itemDataLancamento').value = '';
     document.getElementById('itemDescricao').value = '';
     document.getElementById('itemCuriosidade').value = '';
-
-    // Limpa a Imagem Principal (Input e Preview)
     document.getElementById('arquivoUpload').value = ''; 
     const previewImagem = document.getElementById('previewImagem');
     if (previewImagem) {
         previewImagem.src = '';
         previewImagem.style.display = 'none';
     }
-
-    // Limpa as 5 Imagens da Galeria
     for (let i = 1; i <= 5; i++) {
         const fileInput = document.getElementById(`galeriaArquivoUpload_${i}`);
         const previewImg = document.getElementById(`previewFoto_${i}`);
@@ -105,42 +91,26 @@ function limparFormulario() {
         if (hiddenInput) hiddenInput.value = '';
     }
 }
-
-// C - CREATE (Inserir) - Lógica Corrigida para Inserção
 async function inserirItem() {
     const btnInserir = document.querySelector('.btn-inserir');
     const originalText = btnInserir.innerHTML;
-    
     try {
-        // Mostrar feedback visual de carregamento
         btnInserir.disabled = true;
         btnInserir.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processando...';
-        
-        // Obter dados do formulário e remover o ID para que o servidor gere um novo
         const dados = await obterDadosFormulario();
-        delete dados.id; // Garantir que não enviamos um ID
-        
-        // Adicionar o ID do usuário logado
+        delete dados.id;
         const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
         dados.userId = usuarioLogadoId;
-        
         console.log('Dados do formulário:', dados);
-        
-        // Validação básica
         if (!dados.nome || !dados.categoria || !dados.imagem) {
             const camposFaltando = [];
             if (!dados.nome) camposFaltando.push('Nome do Jogo');
             if (!dados.categoria) camposFaltando.push('Categoria');
             if (!dados.imagem) camposFaltando.push('Imagem Principal');
-            
             alert(`Por favor, preencha os seguintes campos obrigatórios:\n${camposFaltando.join('\n')}`);
             return;
         }
-        
-        // Atualizar mensagem de carregamento
         btnInserir.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
-        
-        // Inserir na tabela de jogos
         const response = await fetch('http://localhost:3000/jogos', {
             method: 'POST',
             headers: {
@@ -148,19 +118,15 @@ async function inserirItem() {
             },
             body: JSON.stringify(dados)
         });
-        
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             console.error('Erro na resposta do servidor:', response.status, errorData);
             throw new Error(`Erro ao cadastrar jogo (${response.status}): ${errorData.message || 'Tente novamente mais tarde'}`);
         }
-        
         const novoJogo = await response.json();
         console.log('Jogo cadastrado com sucesso!', novoJogo);
-
-        // Criar entrada em detalhesdoItem
         const detalhesItem = {
-            id: novoJogo.id.toString(), // Usar o mesmo ID do jogo
+            id: novoJogo.id.toString(),
             nome: dados.nome,
             categoria: dados.categoria,
             dataLancamento: dados.dataLancamento || 'Data não especificada',
@@ -169,8 +135,6 @@ async function inserirItem() {
             imagem_principal: dados.imagem,
             fotos: dados.galeria || []
         };
-
-        // Inserir na tabela detalhesdoItem
         const detalhesResponse = await fetch('http://localhost:3000/detalhesdoItem', {
             method: 'POST',
             headers: {
@@ -178,83 +142,55 @@ async function inserirItem() {
             },
             body: JSON.stringify(detalhesItem)
         });
-
         if (!detalhesResponse.ok) {
             const errorData = await detalhesResponse.json().catch(() => ({}));
             console.error('Erro ao cadastrar detalhes do jogo:', detalhesResponse.status, errorData);
             throw new Error(`Erro ao cadastrar detalhes do jogo (${detalhesResponse.status}): ${errorData.message || 'Tente novamente mais tarde'}`);
         }
-
         console.log('Detalhes do jogo cadastrados com sucesso!');
-        
-        // Feedback de sucesso
         btnInserir.innerHTML = '<i class="bi bi-check-circle"></i> Cadastrado!';
         btnInserir.classList.remove('btn-primary');
         btnInserir.classList.add('btn-success');
-        
-        // Limpar formulário e lista
         limparFormulario();
         await carregarListagemCRUD();
-        
-        // Atualizar lista na página inicial se a função existir
         if (typeof carregarHome === 'function') {
             carregarHome();
         }
-        
-        // Resetar o botão após 2 segundos
         setTimeout(() => {
             btnInserir.disabled = false;
             btnInserir.innerHTML = originalText;
             btnInserir.classList.remove('btn-success');
             btnInserir.classList.add('btn-primary');
         }, 2000);
-        
     } catch (error) {
         console.error('Erro ao cadastrar jogo:', error);
         alert(error.message || 'Erro ao cadastrar jogo. Verifique o console para mais detalhes.');
-        
-        // Reativar o botão em caso de erro
         btnInserir.disabled = false;
         btnInserir.innerHTML = 'Tentar Novamente';
     }
 }
-
 async function carregarListagemCRUD() {
     const listaCorpo = document.querySelector('.listagem-corpo'); 
-    
     if (!listaCorpo) {
         console.error('Contêiner .listagem-corpo não encontrado.');
         return;
     }
-
     listaCorpo.innerHTML = '<p>Carregando...</p>';
-
     try {
         const response = await fetch('http://localhost:3000/jogos');
         if (!response.ok) throw new Error('Erro ao carregar jogos');
-        
         const itens = await response.json();
-        
-        // Obter o ID do usuário logado (simulado para teste)
         const usuarioLogadoId = localStorage.getItem('usuarioLogadoId') || '1';
-        
-        // Filtrar itens para mostrar apenas os do usuário logado
         const itensDoUsuario = itens.filter(item => String(item.userId) === usuarioLogadoId);
-        
-        listaCorpo.innerHTML = ''; // Limpa a mensagem de carregamento
-        
+        listaCorpo.innerHTML = '';
         if (itensDoUsuario.length === 0) {
             listaCorpo.innerHTML = '<p>Nenhum jogo cadastrado.</p>';
             return;
         }
-        
         itensDoUsuario.forEach(item => {
             const row = document.createElement('div');
             row.className = 'listagem-row';
-            
-            // Garantir que o ID seja uma string
             const itemId = String(item.id || '');
-            
             row.innerHTML = `
                 <div class="listagem-col id">${itemId}</div>
                 <div class="listagem-col">${item.nome || 'N/A'}</div> 
@@ -284,35 +220,27 @@ async function carregarListagemCRUD() {
             </p>`;
     }
 }
-
-// D - DELETE (Excluir)
 window.excluirItem = async function(itemId) {
     if (!itemId) {
         console.error('ID do jogo não fornecido para exclusão');
         return;
     }
-    
     if (!confirm('Tem certeza que deseja excluir este jogo?')) {
         return;
     }
-    
     try {
-        // Excluir da tabela de jogos
         const responseJogos = await fetch(`http://localhost:3000/jogos/${itemId}`, {
             method: 'DELETE'
         });
-        // Excluir da tabela de detalhesdoItem
         const responseDetalhes = await fetch(`http://localhost:3000/detalhesdoItem/${itemId}`, {
             method: 'DELETE'
         });
         
         if (responseJogos.ok && responseDetalhes.ok) {
             alert('Jogo excluído com sucesso!');
-            // Se estiver na página de listagem, atualiza a lista
             if (window.location.pathname.includes('novos_jogos.html')) {
                 carregarListagemCRUD();
             }
-            // Atualiza a home se estiver em outra página
             if (typeof carregarHome === 'function') {
                 carregarHome();
             }
@@ -327,8 +255,6 @@ window.excluirItem = async function(itemId) {
         alert('Erro ao excluir o jogo.');
     }
 };
-
-// Função para preencher o formulário com os dados do jogo para edição
 window.preencherFormularioParaEdicao = async function(itemId) {
     if (!itemId) {
         console.error('ID do jogo não fornecido para edição');
@@ -336,13 +262,9 @@ window.preencherFormularioParaEdicao = async function(itemId) {
     }
         
     try {
-        // Buscar os dados do jogo
         const response = await fetch(`http://localhost:3000/jogos/${itemId}`);
         if (!response.ok) throw new Error('Jogo não encontrado');
-            
         const jogo = await response.json();
-            
-        // Buscar os detalhes do jogo
         let detalhes = {};
         try {
             const detalhesResponse = await fetch(`http://localhost:3000/detalhesdoItem/${itemId}`);
@@ -352,8 +274,6 @@ window.preencherFormularioParaEdicao = async function(itemId) {
         } catch (e) {
             console.warn('Não foi possível carregar os detalhes adicionais', e);
         }
-            
-        // Preencher o formulário com os dados do jogo
         document.getElementById('itemId').value = jogo.id || '';
         document.getElementById('itemNome').value = jogo.nome || '';
         document.getElementById('itemCategoria').value = jogo.categoria || '';
@@ -361,11 +281,8 @@ window.preencherFormularioParaEdicao = async function(itemId) {
         document.getElementById('itemDataLancamento').value = jogo.dataLancamento || '';
         document.getElementById('itemDescricao').value = detalhes.descricao || '';
         document.getElementById('itemCuriosidade').value = detalhes.curiosidade || '';
-            
-        // Preencher imagem principal
         const previewImagem = document.getElementById('previewImagem');
         const imagemPrincipalInput = document.getElementById('imagemPrincipalBase64');
-            
         if (detalhes.imagem_principal) {
             previewImagem.src = detalhes.imagem_principal;
             previewImagem.style.display = 'block';
@@ -379,8 +296,6 @@ window.preencherFormularioParaEdicao = async function(itemId) {
             previewImagem.src = '';
             imagemPrincipalInput.value = '';
         }
-            
-        // Limpar todos os campos de galeria primeiro
         for (let i = 1; i <= 5; i++) {
             const preview = document.getElementById(`previewFoto_${i}`);
             const hiddenInput = document.getElementById(`galeriaFotoBase64_${i}`);
@@ -392,8 +307,6 @@ window.preencherFormularioParaEdicao = async function(itemId) {
                 hiddenInput.value = '';
             }
         }
-            
-        // Preencher galeria de imagens
         if (detalhes.fotos && Array.isArray(detalhes.fotos)) {
             detalhes.fotos.forEach((foto, index) => {
                 const i = index + 1;
@@ -407,29 +320,22 @@ window.preencherFormularioParaEdicao = async function(itemId) {
                 }
             });
         }
-            
-        // Atualizar o estado dos botões
         const btnInserir = document.querySelector('.btn-inserir');
         const btnAlterar = document.querySelector('.btn-alterar');
         const btnExcluir = document.querySelector('.btn-excluir');
-            
         if (btnInserir) {
             btnInserir.disabled = true;
             btnInserir.classList.remove('btn-primary');
             btnInserir.classList.add('btn-secondary');
         }
-            
         if (btnAlterar) {
             btnAlterar.disabled = false;
             btnAlterar.classList.remove('btn-secondary');
             btnAlterar.classList.add('btn-primary');
         }
-            
         if (btnExcluir) {
             btnExcluir.disabled = false;
         }
-            
-        // Rolar para o topo do formulário
         window.scrollTo({ top: 0, behavior: 'smooth' });
             
     } catch (error) {
@@ -437,8 +343,6 @@ window.preencherFormularioParaEdicao = async function(itemId) {
         alert('Erro ao carregar os dados do jogo para edição: ' + error.message);
     }
 };
-
-// U - UPDATE (Atualizar)
 window.alterarItem = async function() {
     const itemId = document.getElementById('itemId')?.value;
     if (!itemId) {
@@ -450,16 +354,11 @@ window.alterarItem = async function() {
     const originalText = btnAlterar?.innerHTML;
     
     try {
-        // Mostrar indicador de carregamento
         if (btnAlterar) {
             btnAlterar.disabled = true;
             btnAlterar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Salvando...';
         }
-
-        // Obter os dados atualizados do formulário
         const dadosAtualizados = await obterDadosFormulario();
-        
-        // Atualizar na tabela de jogos
         const response = await fetch(`http://localhost:3000/jogos/${itemId}`, {
             method: 'PUT',
             headers: {
@@ -472,8 +371,6 @@ window.alterarItem = async function() {
             const errorData = await response.json().catch(() => ({}));
             throw new Error(errorData.message || 'Erro ao atualizar o jogo');
         }
-
-        // Atualizar na tabela de detalhes
         const detalhesAtualizados = {
             id: itemId,
             nome: dadosAtualizados.nome,
@@ -484,7 +381,6 @@ window.alterarItem = async function() {
             imagem_principal: dadosAtualizados.imagem,
             fotos: dadosAtualizados.galeria || []
         };
-
         const detalhesResponse = await fetch(`http://localhost:3000/detalhesdoItem/${itemId}`, {
             method: 'PUT',
             headers: {
@@ -496,23 +392,15 @@ window.alterarItem = async function() {
         if (!detalhesResponse.ok) {
             throw new Error('Erro ao atualizar os detalhes do jogo');
         }
-
-        // Feedback de sucesso
         if (btnAlterar) {
             btnAlterar.innerHTML = '<i class="bi bi-check-circle"></i> Atualizado!';
             btnAlterar.classList.remove('btn-primary');
             btnAlterar.classList.add('btn-success');
         }
-
-        // Atualizar a listagem
         await carregarListagemCRUD();
-        
-        // Atualizar a home se estiver em outra página
         if (typeof carregarHome === 'function') {
             carregarHome();
         }
-
-        // Resetar o botão após 2 segundos
         setTimeout(() => {
             if (btnAlterar) {
                 btnAlterar.disabled = false;
@@ -520,51 +408,37 @@ window.alterarItem = async function() {
                 btnAlterar.classList.remove('btn-success');
                 btnAlterar.classList.add('btn-primary');
             }
-            
-            // Limpar o formulário após atualização
             limparFormulario();
-            
-            // Habilitar botão de inserir e desabilitar os outros
             const btnInserir = document.querySelector('.btn-inserir');
             const btnExcluir = document.querySelector('.btn-excluir');
             
             if (btnInserir) btnInserir.disabled = false;
             if (btnExcluir) btnExcluir.disabled = true;
-            
         }, 2000);
-
     } catch (error) {
         console.error('Erro ao atualizar jogo:', error);
         alert(error.message || 'Erro ao atualizar o jogo. Verifique o console para mais detalhes.');
-        
-        // Reativar o botão em caso de erro
         if (btnAlterar) {
             btnAlterar.disabled = false;
             btnAlterar.innerHTML = 'Tentar Novamente';
         }
     }
 };
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Configurar eventos dos botões na página de cadastro
     if (window.location.pathname.includes('novos_jogos.html')) {
         const btnInserir = document.getElementById('btnInserir');
         const btnAlterar = document.getElementById('btnAlterar');
         const btnExcluir = document.getElementById('btnExcluir');
         const btnLimpar = document.getElementById('btnLimpar');
         const form = document.querySelector('form');
-        
-        // Configurar eventos dos botões
         if (btnInserir) {
             btnInserir.addEventListener('click', inserirItem);
             btnInserir.disabled = false;
         }
-        
         if (btnAlterar) {
             btnAlterar.addEventListener('click', alterarItem);
-            btnAlterar.disabled = true; // Inicialmente desabilitado
+            btnAlterar.disabled = true;
         }
-        
         if (btnExcluir) {
             btnExcluir.addEventListener('click', function() {
                 const itemId = document.getElementById('itemId')?.value;
@@ -574,20 +448,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
-            btnExcluir.disabled = true; // Inicialmente desabilitado
+            btnExcluir.disabled = true; 
         }
-        
         if (btnLimpar) {
             btnLimpar.addEventListener('click', function() {
                 limparFormulario();
-                // Habilita o botão de inserir e desabilita os outros
                 if (btnInserir) btnInserir.disabled = false;
                 if (btnAlterar) btnAlterar.disabled = true;
                 if (btnExcluir) btnExcluir.disabled = true;
             });
         }
-        
-        // Configurar preview para as imagens da galeria
         for (let i = 1; i <= 5; i++) {
             const input = document.getElementById(`galeriaArquivoUpload_${i}`);
             if (input) {
@@ -608,8 +478,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         }
-        
-        // Configurar preview da imagem principal
         const inputImagem = document.getElementById('arquivoUpload');
         if (inputImagem) {
             inputImagem.addEventListener('change', function(e) {
@@ -628,16 +496,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
-        // Carregar lista de jogos
         carregarListagemCRUD();
-        
-        // Verificar se há um ID na URL para edição
         const urlParams = new URLSearchParams(window.location.search);
         const idParaEditar = urlParams.get('id');
         if (idParaEditar) {
             preencherFormularioParaEdicao(idParaEditar);
         }
     }
-    // Verifica em qual página está e carrega o conteúdo apropriado
 });
