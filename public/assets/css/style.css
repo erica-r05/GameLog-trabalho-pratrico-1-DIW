@@ -14,8 +14,7 @@ header {
     height: 90px;
     display: flex;
     align-items: center;
-    justify-content: space-between;     
-    
+    justify-content: space-between;
 }
 .header-actions {
     display: flex;
@@ -56,20 +55,20 @@ header {
     margin: 0 auto;
 }
 
-.carousel-item { /*formatação da div do conteudo do carrossel*/
+.carousel-item {
     flex: 0 0 100%;
     position: relative;
     height: 70vh;
 }
 
-.carousel-item img { /*formatação da imagem do carrossel*/
+.carousel-item img {
     height: 500px;
     object-fit: cover;
     width: 100%;
     flex-shrink: 0;
 }
 
-.carousel-caption { /*formatação das legendas do carrossel*/
+.carousel-caption {
     position: absolute;
     bottom: 10%;
     left: 10%;
@@ -77,19 +76,19 @@ header {
     color: white;
     max-width: 600px;
 }
-.slide-overlay { /*formatação da div que eu coloquei pra dar uma sombrinha no carrossel*/
+.slide-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: linear-gradient(to right,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 50%,
-            rgba(0, 0, 0, 0) 100%);
+                rgba(0, 0, 0, 0.8) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0) 100%);
     z-index: 1;
 }
-.categoria-grid { /*formatação dos cards agora*/
+.categoria-grid {
     align-items: center;
     max-width: 1400px;
     height: auto;
@@ -101,16 +100,16 @@ header {
 
 }
 
-.image_content img { /*formatação da imagem */
+.image_content img {
     width: 180px;
     height: 200px;
 }
 
-.card_infos { /*formatação da info*/
+.card_infos {
     margin-top: 10px !important;
 }
 
-.card-content { /*formatação do conteudo*/
+.card-content {
     text-align: center;
     margin-right: 10px;
     margin-left: 25px;
@@ -124,13 +123,13 @@ header {
     background-color: #3a1c6e;
     height: 400px;
     width: 290px;
-    position: relative; 
+    position: relative;
 }
 
 h1,
 h2,
 h3,
-h4 { /*formatação padrão dos titulos*/
+h4 {
     color: #e0b3ff !important;
     text-align: center !important;
     margin-left: 40px !important;
@@ -149,8 +148,8 @@ h5 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     font-size: xx-large !important;
 }
- 
-.game-title { 
+
+.game-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 0px;
@@ -172,7 +171,7 @@ h5 {
     color: #e0e0e0;
 }
 
-.btn-info { /*botões pra ir pros detalhes dos cards né*/
+.btn-info {
     background: rgba(186, 118, 226, 0.7);
     color: white;
     border: none;
@@ -185,11 +184,11 @@ h5 {
 
 }
 
-.btn-info:hover {/*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
+.btn-info:hover {
     background: rgba(87, 38, 128, 0.9);
 }
 
-.prev-btn { /*queria arrumar a posição dos botões do carrossel*/
+.prev-btn {
     left: 20px;
 }
 
@@ -197,7 +196,7 @@ h5 {
     right: 20px;
 }
 
-.btn-primary {/*botões pra ir pros detalhes do carrossel né*/
+.btn-primary {
     background: rgba(186, 118, 226, 0.7) !important;
     color: white !important;
     border: none !important;
@@ -209,11 +208,11 @@ h5 {
     margin-top: 90px !important;
 }
 
-.btn-primary:hover {/*isso daqui é pro botão mudar o tom de roxo quando a gente passa o mouse em cima, fica mais bonitinhoo*/
+.btn-primary:hover {
     background: rgba(87, 38, 128, 0.9) !important;
 }
 
-.informacoes-aluno-container { /*daqui ja começa a formatação do footer e do conteudo do footer*/
+.informacoes-aluno-container {
     max-width: 1000px;
     margin: auto;
     margin-top: 35px;
@@ -243,7 +242,6 @@ h5 {
 
 .bloco-texto p {
     height: 12px;
-    /* Altura da linha */
     margin-bottom: 0px;
     border-radius: 2px;
     margin-top: 10px;
@@ -259,7 +257,6 @@ h5 {
 .dados-autoria {
     display: flex;
     align-items: flex-start;
-    /* Alinha o ícone no topo */
     margin-bottom: 10px;
     margin-top: 15px;
 }
@@ -280,10 +277,8 @@ h5 {
     font-size: 0.9em;
 }
 
-/* Redes Sociais */
 .icones-sociais img {
     width: 24px;
-    /* Tamanho dos ícones */
     height: 24px;
     margin-right: 10px;
 }
@@ -306,277 +301,212 @@ footer {
     padding-top: 20px;
 
 }
-/* Posição e aparência do ícone de coração */
 .favorite-icon {
     position: absolute;
-    top: 15px;        /* Posição vertical: 15px da borda superior do card */
-    right: 15px;      /* Posição horizontal: 15px da borda direita do card */
-    font-size: 26px;  /* Tamanho do ícone (aumentado um pouco) */
+    top: 15px;
+    right: 15px;
+    font-size: 26px;
     cursor: pointer;
-    color: #f1f1f1;   /* Cor padrão: Cinza bem claro (quase branco) */
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Sombra para dar destaque em fundos claros */
+    color: #f1f1f1;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     transition: color 0.3s ease;
-    color: rgba(255, 255, 255, 0.4); /* Cor padrão: Branco com transparência */
+    color: rgba(255, 255, 255, 0.4);
     transition: color 0.3s ease, transform 0.3s ease;
     z-index: 10;
 }
-/* Cor do coração quando ele está ativo/favoritado */
 .favorite-icon.favorited {
-    /* MUDANÇA PRINCIPAL: Cor vermelha e opaca */
-    color: #da2626; /* Vermelho Vivo */
-    
-    /* Opcional: Efeito de pulso para feedback visual */
+    color: #da2626;
     transform: scale(1.1);
-    filter: drop-shadow(0 0 5px rgba(171, 36, 36, 0.6)); /* Adiciona um brilho vermelho */
+    filter: drop-shadow(0 0 5px rgba(171, 36, 36, 0.6));
 }
-/* Deixa o coração um pouco mais visível ao passar o mouse */
 .favorite-icon:hover:not(.favorited) {
-    color: rgba(255, 255, 255, 0.7); /* Fica 70% opaco ao passar o mouse */
+    color: rgba(255, 255, 255, 0.7);
 }
-/* --- Estilização do Campo de Pesquisa --- */
 
 .search-container {
-    /* Centraliza o contêiner de pesquisa */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* Define a largura máxima e adiciona margem */
     max-width: 700px;
     width: 90%;
-    margin: 30px auto 30px auto; 
-    
-    /* Habilita o posicionamento absoluto/relativo para o ícone */
+    margin: 30px auto 30px auto;
     position: relative;
 }
 #searchInput {
-    /* Ocupa a largura total do contêiner */
-    width: 100%; 
-    padding: 12px 45px 12px 15px; /* Padding ajustado para o ícone */
-    
-    /* Aparência */
-    border: 2px solid #333; /* Borda escura */
-    border-radius: 25px; 
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 2px solid #333;
+    border-radius: 25px;
     font-size: 16px;
     outline: none;
-    
-    /* Transição suave para o foco */
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    background-color: #2d2033; /* Fundo escuro */
-    color: #f0f0f0; /* Texto claro */
+    background-color: #231638;
+    color: #f0f0f0;
 }
 
 #searchInput:focus {
-    /* Efeito ao focar */
-    border-color: #007bff; /* Exemplo de cor de destaque (Azul) */
+    border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Garante que o placeholder tenha uma cor visível no tema escuro */
 #searchInput::placeholder {
     color: #aaa;
 }
 .search-container .fa-search {
-    /* Posicionamento absoluto dentro do contêiner */
     position: absolute;
-    right: 15px; 
-    
-    /* Estilo do ícone */
-    color: #aaa; /* Cor suave */
+    right: 15px;
+    color: #aaa;
     font-size: 18px;
-    pointer-events: none; /* Garante que o clique passe para o input */
+    pointer-events: none;
 }
-/* ========================================================================= */
-/* --- MEDIA QUERIES PARA CARROSSEL E GRÁFICO --- */
-/* ========================================================================= */
-
 @media (max-width: 768px) {
-    
-    /* ------------------------------------------------ */
-    /* --- CARROSSEL --- */
-    /* ------------------------------------------------ */
-
     .carousel-fixed-height {
-        width: 100%; /* Ocupa a largura total em telas menores */
+        width: 100%;
         max-width: 100%;
-        max-height: 350px; /* Reduz a altura máxima para não ocupar muito espaço vertical */
+        max-height: 350px;
     }
 
     .carousel-item {
-        height: auto; /* Deixa o item se ajustar ao novo max-height */
+        height: auto;
     }
 
     .carousel-item img {
-        height: 350px; /* Ajusta a altura da imagem para o novo limite */
+        height: 350px;
     }
 
     .carousel-caption {
-        bottom: 5%; /* Move a legenda um pouco para cima */
+        bottom: 5%;
         left: 5%;
         right: 5%;
         max-width: 90%;
-        padding: 0 10px; /* Adiciona um pequeno padding lateral */
+        padding: 0 10px;
     }
-    
     .carousel-caption h2 {
-        font-size: 1.5em !important; /* Reduz o tamanho do título */
+        font-size: 1.5em !important;
         margin-bottom: 5px !important;
     }
-    
-    .carousel-caption p {
-        display: none; /* Esconde a descrição longa para economizar espaço */
-    }
 
+    .carousel-caption p {
+        display: none;
+    }
     .btn-primary {
         padding: 8px 20px !important;
         font-size: 0.9rem !important;
         margin-top: 20px !important;
         margin-bottom: 0 !important;
     }
-    
-    /* Oculta os indicadores e controles do Bootstrap em telas muito pequenas, se necessário, 
-       mas geralmente é melhor mantê-los se houver espaço. Vamos ajustar o tamanho. */
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
-        width: 25px; 
+        width: 25px;
         height: 25px;
     }
-    
-    /* ------------------------------------------------ */
-    /* --- GRÁFICO DE CATEGORIAS --- */
-    /* ------------------------------------------------ */
-    
-    /* A div que contém o canvas, com estilo inline 'width: 750px' no HTML */
     div[style="width: 750px; margin: auto;"] {
-        width: 95% !important; /* Sobrescreve o estilo inline para ser responsivo */
-        max-width: 95%; 
-        margin: 30px auto; /* Garante centralização e margem */
+        width: 95% !important;
+        max-width: 95%;
+        margin: 30px auto;
     }
-
-    /* O elemento canvas em si */
     #graficoCategorias {
-        height: auto !important; /* Permite que a altura se ajuste à largura */
+        height: auto !important;
     }
 }
 
 @media (max-width: 480px) {
-    /* Ajustes extras para o carrossel em celulares muito pequenos */
     .carousel-fixed-height {
-        max-height: 250px; 
+        max-height: 250px;
     }
-    
+
     .carousel-item img {
         height: 250px;
     }
-    
+
     .carousel-caption h2 {
         font-size: 1.2em !important;
     }
-    
+
     .btn-primary {
         padding: 6px 15px !important;
         font-size: 0.75rem !important;
     }
 }
-/* ========================================================================= */
-/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
-/* ========================================================================= */
-
 @media (max-width: 768px) {
-    
-    /* --- Layout Geral e Títulos --- */
-    
     body {
-        /* Garante que o corpo docupe a tela em dispositivos móveis */
-        padding-bottom: 70px; /* Adiciona espaço para evitar que o footer cubra conteúdo */
+        padding-bottom: 70px;
     }
-
     h1, h2, h3, h4, h5 {
-        /* Ajusta margens e centraliza títulos para telas menores */
         margin-left: 0 !important;
-        font-size: 1.8em !important; 
+        font-size: 1.8em !important;
         text-align: center !important;
         margin-top: 15px !important;
         margin-bottom: 25px !important;
     }
-
-    /* --- Header e Ações --- */
-    
     header {
-        /* Permite que o header ocupe a largura total */
         height: auto;
         padding: 10px 10px;
-        flex-direction: column; /* Empilha logo e ações verticalmente */
+        flex-direction: column;
     }
-    
+
     #logo {
-        width: 150px; /* Reduz o tamanho do logo */
+        width: 150px;
         height: 75px;
         margin-bottom: 10px;
     }
 
     #logo img {
         height: 75px;
-        margin-bottom: 0; /* Remove margem desnecessária */
-    }
-    
-    .header-actions {
-        justify-content: center; /* Centraliza botões */
-        margin: 5px 0;
-        flex-wrap: wrap; /* Permite que os botões quebrem linha */
-    }
-    
-    .btn-actions {
-        padding: 8px 15px; /* Reduz o padding do botão */
-        font-size: 0.9rem;
+        margin-bottom: 0;
     }
 
-    /* --- Campo de Pesquisa --- */
-    
+    .header-actions {
+        justify-content: center;
+        margin: 5px 0;
+        flex-wrap: wrap;
+    }
+
+    .btn-actions {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
     .search-container {
         margin: 20px auto;
-        width: 95%; 
-        max-width: none; 
+        width: 95%;
+        max-width: none;
     }
 
     #searchInput {
         font-size: 14px;
-        padding: 10px 40px 10px 12px; 
-    }
-    
-    .search-container .fa-search {
-        right: 12px; 
-        font-size: 16px;
+        padding: 10px 40px 10px 12px;
     }
 
-    /* --- Grid de Cards (Jogos) --- */
-    
+    .search-container .fa-search {
+        right: 12px;
+        font-size: 16px;
+    }
     .categoria-grid {
         display: flex;
-        flex-direction: column; /* Empilha os cards verticalmente */
+        flex-direction: column;
         align-items: center;
-        max-width: 100%; 
+        max-width: 100%;
         margin-bottom: 30px;
     }
 
     .card-content {
-        width: 90%; /* Ocupa a maior parte da largura da tela */
-        max-width: 350px; /* Define um limite para o tamanho do card */
+        width: 90%;
+        max-width: 350px;
         margin: 15px 0;
-        height: auto; /* Permite que a altura se ajuste ao conteúdo */
+        height: auto;
         padding-bottom: 20px;
     }
-    
+
     .image_content img {
-        width: 100%; /* Imagem se ajusta à largura do card */
-        max-width: 180px; 
+        width: 100%;
+        max-width: 180px;
         height: auto;
     }
-    
+
     .card_infos p, span {
-        font-size: medium; /* Reduz o tamanho da fonte das infos do card */
+        font-size: medium;
     }
-    
+
     .btn-info {
         font-size: 0.8rem;
         padding: 10px 25px;
@@ -592,21 +522,19 @@ footer {
     #searchInput {
         padding: 8px 35px 8px 10px;
     }
-    
+
     .search-container .fa-search {
-        right: 10px; 
+        right: 10px;
         font-size: 14px;
     }
-    
-    /* Reduz ainda mais o tamanho da fonte em geral para caber */
     h1, h2, h5 {
         font-size: 1.5em !important;
     }
-    
+
     .carousel-item img {
-        height: 250px; 
+        height: 250px;
     }
-    
+
     .carousel-caption h2 {
         font-size: 1.2em !important;
     }

@@ -375,7 +375,6 @@ async function carregarDetalhes() {
     }
 }
 async function carregarGraficoCategorias() {
-    //Buscar todos os jogos da plataforma (sem filtrar)
     const response = await fetch("http://localhost:3000/jogos");
     const jogos = await response.json();
 
@@ -393,11 +392,8 @@ async function carregarGraficoCategorias() {
         }
         categoriasCount[categoria]++;
     });
-
-    // Preparar dados para o gráfico
     const labels = Object.keys(categoriasCount);
     const data = Object.values(categoriasCount);
-    // Criar o gráfico
     const ctx = document.getElementById("graficoCategorias").getContext("2d");
     new Chart(ctx, {
         type: "bar",
@@ -420,56 +416,32 @@ async function carregarGraficoCategorias() {
         }
     });
 }
-/**
- * Filtra os cards de jogos visíveis com base no texto inserido no campo de pesquisa.
- * Deve ser chamada no evento 'onkeyup' do campo de pesquisa.
- */
 function filterGames() {
-    // 1. Pega o texto de pesquisa e o normaliza
     const input = document.getElementById('searchInput');
-    // Se o campo de pesquisa não existir, não faz nada
     if (!input) {
         console.warn("Elemento 'searchInput' não encontrado.");
         return;
     }
     const filterText = input.value.toLowerCase().trim();
-
-    // 2. Pega todos os cards de jogos.
-    // O seletor '.card-content' corresponde à div que encapsula cada jogo em carregarHome().
     const gameCards = document.querySelectorAll('.categoria-grid .card-content'); 
-
-    // 3. Itera sobre cada card para verificar se corresponde ao filtro
     gameCards.forEach(card => {
-        // As classes do HTML gerado em carregarHome() são:
-        // Título: <p>${item.nome}</p> - Usaremos o texto de todos os parágrafos (<p>) dentro de '.card_infos'.
-        // Categoria/Descrição: <span>${item.categoria}</span> - Usaremos o texto de todos os spans (<span>) dentro de '.card_infos'.
-        
-        // Vamos extrair todo o texto relevante do card
         const cardInfos = card.querySelector('.card_infos');
         let textToSearch = '';
 
         if (cardInfos) {
-            // Pega todo o texto dos parágrafos e spans (onde estão nome e categoria)
             const elements = cardInfos.querySelectorAll('p, span');
             elements.forEach(el => {
                 textToSearch += el.textContent.toLowerCase() + ' ';
             });
         }
-        
-        // *OPCIONAL: Adicionar a descrição completa do jogo ao card na função carregarHome
-        // Para incluir a descrição, você precisaria carregar a descrição completa do jogo
-        // e adicioná-la a um atributo `data-description` no `.card-content` em `carregarHome`.
         const dataDescription = card.getAttribute('data-description');
         if (dataDescription) {
             textToSearch += dataDescription.toLowerCase();
         }
-
-
-        // 4. Aplica o filtro
         if (filterText === '' || textToSearch.includes(filterText)) {
-            card.style.display = ''; // Volta a exibir (usa o display padrão: 'grid'/'flex'/'block', dependendo do CSS)
+            card.style.display = ''; 
         } else {
-            card.style.display = 'none'; // Esconde o card
+            card.style.display = 'none'; 
         }
     });
 }

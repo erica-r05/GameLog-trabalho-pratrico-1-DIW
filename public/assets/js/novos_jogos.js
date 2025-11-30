@@ -197,13 +197,14 @@ async function carregarListagemCRUD() {
                 <div class="listagem-col">${item.categoria || 'N/A'}</div> 
                 <div class="listagem-col">${item.avaliacao || 'N/A'}</div>
                 <div class="listagem-col actions">
-                    <button class="btn btn-sm btn-alterar crud-btn" 
-                            onclick="preencherFormularioParaEdicao('${itemId.replace(/'/g, "\\'")}')">
+                    <button class="btn btn-sm btn-alterar crud-btn"
+                            onclick="preencherFormularioParaEdicao('${itemId.replace(/'/g, "\\'")}')"
+                            style="margin-right: 5px; background-color: #6a42a1; color: white;">
                         Editar
                     </button>
                     <button class="btn btn-sm btn-excluir crud-btn" 
                             onclick="excluirItem('${itemId.replace(/'/g, "\\'")}')" 
-                            style="margin-left: 5px;">
+                            style="margin-right: 5px; background-color:  #ff4d6d; color: white;">
                         Excluir
                     </button>
                 </div>

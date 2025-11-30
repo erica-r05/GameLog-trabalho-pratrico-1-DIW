@@ -1,150 +1,132 @@
-
-       
-   /*
- * ASSUMIMOS QUE O ELEMENTO <header> OU O CONTÊINER PAI 
- * TENHA 'display: flex' e 'justify-content: space-between' 
- * para alinhar o logo (esquerda) e o botão (direita) horizontalmente.
- */
-
-/* --- Logo Voltar --- */
-
+.crud-btn{
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
 .logo-voltar {
     width: 20%;
     height: auto;
-    /* Correção: Remove margin-top excessiva e garante alinhamento básico */
-    margin-top: 0; 
+    margin-top: 0;
     margin-left: 6%;
-    display: flex; /* Garante que a imagem se alinhe verticalmente */
-    align-items: center; 
+    display: flex;
+    align-items: center;
 }
 
 .logo-voltar img {
     height: 120px;
-    /* Correção: Remove as margens problemáticas que causavam desalinhamento */
-    margin-left: 0; 
-    margin-top: 0; 
+    margin-left: 0;
+    margin-top: 0;
 }
-
-/* --- Botão Voltar (Ações) --- */
 
 .header-actions {
     display: flex;
-    align-items: center; /* Centraliza o botão verticalmente com o logo */
-    justify-content: flex-end; 
-    /* Correção: Remove margin-top excessivo */
-    margin-top: 0; 
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0;
     margin-right: 9%;
 }
 
-.btn-voltar { 
+.btn-voltar {
     background: rgba(186, 118, 226, 0.7);
     color: white;
     border: none;
     padding: 12px 30px;
     border-radius: 4px;
     transition: all 0.3s;
-    /* Correção: Remove margens de posição desnecessárias */
-    margin-bottom: 0; 
+    margin-bottom: 0;
     margin-left: 0;
 }
 
 .btn-voltar:hover {
     background: rgba(87, 38, 128, 0.9) !important;
 }
-        .crud-container {
-            max-width: 900px; /* Limita a largura do formulário, como no wireframe */
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #3a1c6e; /* Cor de fundo similar ao card-content */
-            border-radius: 10px;
-            border: 2px solid #6a42a1;
-            color: rgb(255, 255, 255);
-            margin-top: 5%;
-        }
+.crud-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #3a1c6e;
+    border-radius: 10px;
+    border: 2px solid #6a42a1;
+    color: rgb(255, 255, 255);
+    margin-top: 5%;
+}
 
-        .crud-title {
-            color: #e0b3ff;
-            text-align: left !important;
-            margin-left: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 20px !important;
-            font-size: 1.5rem !important;
-            border-bottom: 2px solid #e0b3ff;
-            padding-bottom: 5px;
-        }
+.crud-title {
+    color: #e0b3ff;
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    font-size: 1.5rem !important;
+    border-bottom: 2px solid #e0b3ff;
+    padding-bottom: 5px;
+}
 
-        .form-control {
-            background-color: #15042e !important;
-            border: 1px solid #6a42a1 !important;
-            color: white !important;
-        }
+.form-control {
+    background-color: #15042e !important;
+    border: 1px solid #6a42a1 !important;
+    color: white !important;
+}
 
-        .form-control:focus {
-            box-shadow: 0 0 0 0.25rem rgba(186, 118, 226, 0.5) !important;
-            border-color: #ba76e2 !important;
-        }
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(186, 118, 226, 0.5) !important;
+    border-color: #ba76e2 !important;
+}
 
-        .crud-btn {
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s;
-        }
 
-        .btn-inserir {
-            background: rgba(87, 38, 128, 0.7); /* Azul Claro do wireframe, adaptado para o tom roxo */
-        }
-        .btn-inserir:hover {
-            background: rgba(87, 38, 128, 0.9);
-        }
+.btn-inserir {
+    background: rgba(87, 38, 128, 0.7);
+}
+.btn-inserir:hover {
+    background: rgba(87, 38, 128, 0.9);
+}
 
-        .btn-alterar {
-            background: rgba(186, 118, 226, 0.7); /* Laranja do wireframe, adaptado para o roxo principal */
-        }
-        .btn-alterar:hover {
-            background: rgba(186, 118, 226, 0.9);
-        }
+.btn-alterar {
+    background: rgba(186, 118, 226, 0.7);
+}
+.btn-alterar:hover {
+    background: rgba(186, 118, 226, 0.9);
+}
 
-        .btn-excluir {
-            background: rgba(220, 53, 69, 0.7); /* Vermelho para Excluir */
-        }
-        .btn-excluir:hover {
-            background: rgba(220, 53, 69, 0.9);
-        }
-        
-        .listagem-header {
-            display: flex;
-            margin-top: 30px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #6a42a1;
-            font-weight: bold;
-        }
-        .listagem-row {
-            display: flex;
-            padding: 10px 0;
-            border-bottom: 1px dashed #6a42a1;
-        }
-        .listagem-row:last-child {
-            border-bottom: none;
-        }
-        .listagem-col {
-            flex: 1;
-            padding: 0 10px;
-        }
-        .listagem-col.id {
-            flex: 0 0 50px;
-        }
-        /* Simulação das linhas de dados para Listagem de Itens (igual ao wireframe) */
-        .listagem-col.simulated-line {
-            height: 18px;
-            margin-bottom: 5px;
-            background-color: rgba(186, 118, 226, 0.2);
-            border-radius: 3px;
-        }
-        /* Tabela de listagem */
+.btn-excluir {
+    background: rgba(220, 53, 69, 0.7);
+}
+.btn-excluir:hover {
+    background: rgba(220, 53, 69, 0.9);
+}
+
+.listagem-header {
+    display: flex;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #6a42a1;
+    font-weight: bold;
+}
+.listagem-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px dashed #6a42a1;
+}
+.listagem-row:last-child {
+    border-bottom: none;
+}
+.listagem-col {
+    flex: 1;
+    padding: 0 10px;
+}
+.listagem-col.id {
+    flex: 0 0 50px;
+}
+.listagem-col.simulated-line {
+    height: 18px;
+    margin-bottom: 5px;
+    background-color: rgba(186, 118, 226, 0.2);
+    border-radius: 3px;
+}
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -182,7 +164,6 @@
     transform: translateX(4px);
 }
 
-/* Botões na tabela */
 .btn-editar {
     background-color: #8a4fff;
     color: white;
@@ -215,7 +196,6 @@
     box-shadow: 0 2px 6px rgba(255, 77, 109, 0.3);
 }
 
-/* Cabeçalho da tabela */
 .crud-title {
     color: #6a42a1;
     font-size: 1.5rem;
@@ -225,12 +205,10 @@
     border-bottom: 2px solid #f0e6ff;
 }
 
-/* Linhas alternadas para melhor leitura */
 .table tbody tr:nth-child(even) {
     background-color: #fcfaff;
 }
 
-/* Borda arredondada na primeira e última célula */
 .table th:first-child,
 .table td:first-child {
     padding-left: 1.5rem;
@@ -241,53 +219,55 @@
     padding-right: 1.5rem;
 }
 
-/* Efeito de hover mais suave */
 .table tbody tr {
     transition: all 0.2s ease;
 }
 
-/* Sombra suave no hover */
 .table tbody tr:hover {
     box-shadow: 0 4px 12px rgba(106, 66, 161, 0.1);
 }
+.btn-sm{
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
 @media (max-width: 768px) {
-    
-    /* --- HEADER (Logo Voltar e Botões) --- */
-    
+
     .logo-voltar {
-        width: 40%; /* Aumenta a largura relativa */
+        width: 40%;
         margin-top: 5%;
-        margin-left: 3%; /* Reduz a margem lateral */
+        margin-left: 3%;
     }
 
     .logo-voltar img {
-        height: 80px; /* Reduz o tamanho do logo */
-        margin-left: 0; /* Remove a margem esquerda extra */
+        height: 80px;
+        margin-left: 0;
         margin-top: 0;
     }
 
     .header-actions {
-        /* Garante que o botão Voltar fique visível e centralizado */
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 5%;
         margin-right: 0;
-        width: 100%; /* Ocupa a largura total para centralizar */
+        width: 100%;
     }
 
     .btn-voltar {
         padding: 10px 25px;
         font-size: 0.9rem;
         margin-bottom: 5%;
-        margin-left: 0; /* Centraliza melhor */
+        margin-left: 0;
     }
 
-    /* --- Contêiner Principal do CRUD --- */
-
     .crud-container {
-        width: 95%; 
-        margin: 20px auto; /* Reduz margem superior */
+        width: 95%;
+        margin: 20px auto;
         padding: 15px;
         margin-top: 5%;
     }
@@ -297,32 +277,25 @@
         margin-bottom: 15px !important;
     }
 
-    /* --- Formulário e Inputs --- */
-
     .form-control {
         font-size: 0.9rem;
         padding: 0.5rem 0.75rem;
     }
 
     .crud-btn {
-        width: 100%; /* Botões de ação do formulário ocupam a largura total */
+        width: 100%;
         margin-top: 10px;
         padding: 10px;
         font-size: 0.9rem;
     }
 
-    /* --- Listagem / Tabela --- */
-    
-    /* A regra de overflow-x: auto no @media (max-width: 768px) 
-       já garante que a tabela seja "scrollável" horizontalmente. */
-
     .table th,
     .table td {
-        padding: 0.8rem 0.5rem; /* Reduz o padding das células */
+        padding: 0.8rem 0.5rem;
         font-size: 0.85rem;
-        min-width: 100px; /* Reduz o tamanho mínimo das colunas para caber mais */
+        min-width: 100px;
     }
-    
+
     .table th:first-child,
     .table td:first-child {
         padding-left: 0.8rem;
@@ -335,25 +308,25 @@
 
     .btn-editar,
     .btn-excluir {
-        padding: 0.4rem 0.6rem; /* Reduz o tamanho dos botões da tabela */
+        padding: 0.4rem 0.6rem;
         font-size: 0.75rem;
         margin: 2px;
-        display: block; /* Empilha os botões em telas pequenas */
+        display: block;
     }
 }
 
 
 @media (max-width: 480px) {
-    
+
     .logo-voltar img {
         height: 60px;
     }
-    
+
     .btn-voltar {
         padding: 8px 15px;
         font-size: 0.8rem;
     }
-    
+
     .crud-container {
         padding: 10px;
     }
@@ -361,19 +334,19 @@
     .crud-title {
         font-size: 1.1rem !important;
     }
-    
+
     .crud-btn {
         padding: 8px;
         font-size: 0.8rem;
     }
-    
+
     .table th,
     .table td {
         padding: 0.6rem 0.4rem;
         font-size: 0.75rem;
         min-width: 80px;
     }
-    
+
     .btn-editar,
     .btn-excluir {
         padding: 0.3rem 0.5rem;
